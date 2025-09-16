@@ -1,1 +1,7 @@
-<p>artist-list works!</p>
+@if(artists()){
+  @for (artist of artists()?.content; track artist.id){
+    <app-artist-card [artist]="artist"/>
+  }
+} @else {
+  <section>An Error occur</section>
+}
