@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import {Component, input} from '@angular/core';
+import  {EventSchema} from '../models/event-schema'
 @Component({
   selector: 'app-event-card',
   imports: [],
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './event-card.css'
 })
 export class EventCard {
-
+  event = input.required<EventSchema>()
 }
