@@ -12,11 +12,11 @@ export const routes: Routes = [
     component: ArtistList
   },
   {
-    path: 'artist/:id',
+    path: 'artists/:id',
     component: ArtistDetails
   },
   {
-    path: 'artist/new',
+    path: 'artists/new',
     component: ArtistForm
   },
   {
@@ -24,11 +24,11 @@ export const routes: Routes = [
     component: EventList
   },
   {
-    path: 'event/:id',
-    component: EventDetails
+    path: 'events/new',
+    component: EventForm
   },
   {
-    path: 'event/new',
-    component: EventForm
+    path: 'events/:id',
+    component: EventDetails
   }
 ];

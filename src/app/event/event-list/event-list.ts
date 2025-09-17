@@ -4,12 +4,18 @@ import {EventSchema} from '../models/event-schema';
 import {Page} from '../../shared/models/page';
 import {EventCard} from '../event-card/event-card';
 import {MatPaginator} from '@angular/material/paginator';
+import {MatCard} from '@angular/material/card';
+import {MatButton} from '@angular/material/button';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-event-list',
   imports: [
     EventCard,
-    MatPaginator
+    MatPaginator,
+    MatCard,
+    MatButton,
+    RouterLink
   ],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css'

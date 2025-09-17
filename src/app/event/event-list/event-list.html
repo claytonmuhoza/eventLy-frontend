@@ -1,13 +1,20 @@
-<h2>
-  List of events
-</h2>
+<div class="list-event-header">
+  <h2>
+    List of events
+  </h2>
+  <section>
+    <a routerLink="/events/new" matButton="filled">
+      New event
+    </a>
+  </section>
+</div>
 @if(events() && !error()){
   @if (!loading()){
     <section>
       @if(events()?.content?.length ==0){
-        <div>
+        <mat-card class="no-event-yet">
           No events yet
-        </div>
+        </mat-card>
       }@else{
         <mat-paginator [length]="100"
                        [pageSize]="10"

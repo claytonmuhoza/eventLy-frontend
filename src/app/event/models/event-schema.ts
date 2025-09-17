@@ -5,5 +5,5 @@ export interface EventSchema {
   label: string;
   startDate: Date;
   endDate: Date;
-  artists: Artist[]
+  artists: Artist[] | null;
 }

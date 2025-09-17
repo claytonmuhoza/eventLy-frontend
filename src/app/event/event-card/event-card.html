@@ -1,5 +1,14 @@
 <mat-card appearance="outlined">
   <mat-card-header>
-    Event name {{event().label}}
+    <mat-card-title>{{event().label}}</mat-card-title>
   </mat-card-header>
+  <mat-card-content>
+    @if (event().artists && event().artists?.length!=0){
+      <div>Number of artists: {{event().artists?.length}}</div>
+    } @else {
+      <div class="list-artist-no-content">
+        No artist associate to this event
+      </div>
+    }
+  </mat-card-content>
 </mat-card>
