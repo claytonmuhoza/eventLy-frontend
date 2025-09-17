@@ -1,0 +1,10 @@
+.body-main-container{
+  padding-top: 1rem;
+  width: calc(100% - 12rem);
+  margin: auto;
+}
+@media screen and (max-width: 60rem) {
+  .body-main-container{
+    margin: 1rem;
+  }
+}
