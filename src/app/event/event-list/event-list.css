@@ -12,3 +12,10 @@
   grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   grid-gap: 1rem;
 }
+ .spinner-loader-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top: 2rem;
+ }

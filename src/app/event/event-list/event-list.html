@@ -1,19 +1,19 @@
 <div class="list-event-header">
   <h2>
-    List of events
+    Liste des événements
   </h2>
   <section>
     <a routerLink="/events/new" matButton="filled">
-      New event
+      Nouveau événement
     </a>
   </section>
 </div>
-@if(events() && !error()){
+@if(events()){
   @if (!loading()){
     <section>
       @if(events()?.content?.length ==0){
         <mat-card class="no-event-yet">
-          No events yet
+          Aucun événement pour l'instant!
         </mat-card>
       }@else{
         <section class="list-events-container">
@@ -22,11 +22,32 @@
             <app-event-card [event]="event"/>
           }
         </section>
+        <mat-paginator
+          [length]="events()?.totalElements ?? 0"
+          [pageIndex]="page()"
+          [pageSize]="pageSize()"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          (page)="onPage($event)"
+          aria-label="Sélection de page">
+        </mat-paginator>
       }
     </section>
-  }@else{
-    <div>
-      Loading...
+  }
+
+} @else {
+  @if (loading()){
+    <div class="spinner-loader-container">
+      <mat-spinner></mat-spinner>
+      <span>
+        Chargement...
+      </span>
     </div>
+  }
+  @if (error()) {
+    <mat-card class="no-event-yet">
+      Une erreur s'est produit. Statut: {{
+        error()?.status
+      }}
+    </mat-card>
   }
 }

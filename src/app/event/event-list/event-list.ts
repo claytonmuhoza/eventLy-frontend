@@ -1,12 +1,14 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, computed, effect, inject, signal} from '@angular/core';
 import {EventService} from '../event-service';
 import {EventSchema} from '../models/event-schema';
 import {Page} from '../../shared/models/page';
 import {EventCard} from '../event-card/event-card';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatCard} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-event-list',
@@ -15,27 +17,43 @@ import {RouterLink} from '@angular/router';
     MatPaginator,
     MatCard,
     MatButton,
-    RouterLink
+    RouterLink,
+    MatProgressSpinner,
   ],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css'
 })
 export class EventList {
   private eventServices = inject(EventService);
-  events = signal<Page<EventSchema> | undefined>(undefined);
+  events = signal<Page<EventSchema> | null>(null);
   loading = signal(true);
-  error = signal<string | undefined>(undefined);
+  error = signal<HttpErrorResponse | undefined>(undefined);
+  pageSize = signal(10);
+  page = signal(0);
   ngOnInit() {
-    this.eventServices.listEvents().subscribe({
+    this.fetchData()
+
+  }
+  fetchData(){
+    this.eventServices.listEvents({
+      page:this.page(),
+      size:this.pageSize(),
+      sort:[]
+    }).subscribe({
       next: (event: Page<EventSchema>) => {
         this.loading.set(false);
         this.events.set(event);
       },
-      error: (error) => {
+      error: (error : HttpErrorResponse) => {
         this.loading.set(false);
         this.error.set(error);
         console.error(error);
       }
     })
+  }
+  onPage(e: PageEvent) {
+    this.page.set(e.pageIndex);
+    this.pageSize.set(e.pageSize);
+    this.fetchData()
   }
 }

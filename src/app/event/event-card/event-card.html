@@ -3,16 +3,23 @@
     <mat-card-title>{{event().label}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
+    <mat-chip-set aria-label="Fish selection">
+      <mat-chip class="flex-center"><mat-icon>calendar_month</mat-icon>Début {{event().startDate | date:'dd/MM/yyy'}}</mat-chip>
+      <mat-chip class="flex-center"><mat-icon>calendar_month</mat-icon>
+        Fin {{event().startDate | date:'dd/MM/yyy'}}</mat-chip>
+    </mat-chip-set>
+    <div>Nombre d'artistes: {{event().artists?.length}}</div>
     @if (event().artists && event().artists?.length!=0){
-      <div>Number of artists: {{event().artists?.length}}</div>
     } @else {
       <div class="list-artist-no-content">
-        No artist associate to this event
+        Aucun artiste associé à cet événement
       </div>
     }
   </mat-card-content>
   <mat-card-actions>
-    <button matButton="outlined"><mat-icon>visibility</mat-icon>details</button>
-    <button matButton><mat-icon>delete</mat-icon>Delete</button>
+    <button routerLink="/events/{{event().id}}" matButton="outlined">
+      <mat-icon>visibility</mat-icon>Détails
+    </button>
+    <button matButton><mat-icon>delete</mat-icon>Supprimer</button>
   </mat-card-actions>
 </mat-card>
