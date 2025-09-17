@@ -1,1 +1,32 @@
-<p>event-list works!</p>
+<div class="list-event-header">
+  <h2>
+    List of events
+  </h2>
+  <section>
+    <a routerLink="/events/new" matButton="filled">
+      New event
+    </a>
+  </section>
+</div>
+@if(events() && !error()){
+  @if (!loading()){
+    <section>
+      @if(events()?.content?.length ==0){
+        <mat-card class="no-event-yet">
+          No events yet
+        </mat-card>
+      }@else{
+        <section class="list-events-container">
+          @for (event of events()?.content; track event.id)
+          {
+            <app-event-card [event]="event"/>
+          }
+        </section>
+      }
+    </section>
+  }@else{
+    <div>
+      Loading...
+    </div>
+  }
+}
