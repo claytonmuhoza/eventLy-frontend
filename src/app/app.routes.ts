@@ -12,23 +12,23 @@ export const routes: Routes = [
     component: ArtistList
   },
   {
-    path: 'artist/:id',
-    component: ArtistDetails
+    path: 'artists/new',
+    component: ArtistForm
   },
   {
-    path: 'artist/new',
-    component: ArtistForm
+    path: 'artists/:id',
+    component: ArtistDetails
   },
   {
     path: 'events',
     component: EventList
   },
   {
-    path: 'event/:id',
-    component: EventDetails
+    path: 'events/new',
+    component: EventForm
   },
   {
-    path: 'event/new',
-    component: EventForm
+    path: 'events/:id',
+    component: EventDetails
   }
 ];
