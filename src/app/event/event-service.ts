@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {EventSchema} from './models/event-schema';
 import {Page} from '../shared/models/page';
 import {Pageable} from '../shared/models/pageable';
+import {EventWritingDto} from './models/event-writing-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,8 @@ export class EventService {
       params = params.append('sort', sortField);
     });
     return this.httpClient.get<Page<EventSchema>>(this.baseUrl, {params: params});
+  }
+  public createEvents(event:EventWritingDto): Observable<EventSchema>{
+    return this.httpClient.post<EventSchema>(`${this.baseUrl}`, event);
   }
 }

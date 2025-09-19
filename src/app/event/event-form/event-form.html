@@ -1,1 +1,61 @@
-<p>event-form works!</p>
+<section>
+  <mat-card class="even-form-container">
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+      <h2>Ajouter un nouveau événement</h2>
+      <div>
+        <mat-form-field class="event-field">
+          <mat-label>Nom de l'événement</mat-label>
+          <input type="text" matInput formControlName="label"  [errorStateMatcher]="matcher"
+                 placeholder="Ex. Hellfest">
+          @if (eventForm.controls.label.hasError('required')) {
+            <mat-error>Le nom est <strong>obligatoire</strong></mat-error>
+          }
+          @if (eventForm.controls.label.hasError('minlength')) {
+            <mat-error>Le nom doit avoir <strong>au moins 3 caractères.</strong></mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="event-field">
+          <mat-label>Sélectioner la période</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Début" formControlName="startDate">
+            <input matEndDate placeholder="Fin" formControlName="endDate" [errorStateMatcher]="matcher">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          @if (eventForm.controls.startDate.hasError("matStartDateInvalid")){
+            <mat-error>
+              La date de début doit être antérieure à la date de fin.
+            </mat-error>
+          }
+          @if (eventForm.controls.startDate.hasError("required") && eventForm.controls.endDate.hasError("required") ) {
+            <mat-error>
+              La période est obligatoire
+            </mat-error>
+          } @else {
+            @if (eventForm.controls.startDate.hasError("required")){
+              <mat-error>
+                La date de début est obligatoire
+              </mat-error>
+            }
+            @if (eventForm.controls.endDate.hasError("required")){
+              <mat-error>
+                La date de fin est obligatoire
+              </mat-error>
+            }
+          }
+
+        </mat-form-field>
+      </div>
+      <div class="flex-center">
+        <button matButton="filled" [disabled]="!eventForm.valid"
+        >
+          Créer l'événement
+        </button>
+      </div>
+    </form>
+
+  </mat-card>
+
+</section>
