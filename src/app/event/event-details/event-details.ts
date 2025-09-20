@@ -23,7 +23,7 @@ export class EventDetails {
     eventId  = this.router.snapshot.params['id'];
     eventDetails  = signal<EventSchema | undefined>(undefined);
     ngOnInit() {
-        this.fetchDetailsEvent(this.eventId());
+        this.fetchDetailsEvent(this.eventId);
     }
     fetchDetailsEvent(eventId:string){
       this.eventApi.detailsEvents(eventId).subscribe(
