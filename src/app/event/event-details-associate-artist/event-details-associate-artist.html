@@ -1,0 +1,17 @@
+<form  class="align-center" [formGroup]="associateArtistForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Associer un artiste</mat-label>
+    <input type="text"
+           placeholder="Nom de l'artiste"
+           aria-label="Associer un artiste"
+           matInput
+           formControlName="artistId"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
+      @for (artist of artists(); track artist.id) {
+        <mat-option [value]="artist.id">{{artist.label}}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+  <button matButton="filled" type="submit" [disabled]="!associateArtistForm.valid">Associer</button>
+</form>

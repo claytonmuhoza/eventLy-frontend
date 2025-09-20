@@ -4,8 +4,8 @@
   </mat-card-header>
   <mat-card-content>
     <mat-chip-set aria-label="Fish selection">
-      <mat-chip class="flex-center"><mat-icon>calendar_month</mat-icon>Début {{event().startDate | date:'dd/MM/yyy'}}</mat-chip>
-      <mat-chip class="flex-center"><mat-icon>calendar_month</mat-icon>
+      <mat-chip class="flex-center">Début {{event().startDate | date:'dd/MM/yyy'}}</mat-chip>
+      <mat-chip class="flex-center">
         Fin {{event().startDate | date:'dd/MM/yyy'}}</mat-chip>
     </mat-chip-set>
     <div>Nombre d'artistes: {{event().artists?.length}}</div>

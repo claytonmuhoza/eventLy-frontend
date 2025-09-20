@@ -16,7 +16,11 @@ export class ArtistList {
   private artistService = inject(ArtistService);
   artists = signal<Page<Artist> | null>(null);
   ngOnInit() {
-    this.artistService.listArtists().subscribe(
+    this.artistService.listArtists({
+      page:0,
+      sort: [],
+      size:10,
+    }).subscribe(
       {
         next: data => {
           this.artists.set(data);
