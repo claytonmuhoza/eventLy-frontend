@@ -2,7 +2,7 @@ import {Component, computed, effect, inject, signal} from '@angular/core';
 import {EventService} from '../event-service';
 import {EventSchema} from '../models/event-schema';
 import {Page} from '../../shared/models/page';
-import {EventCard} from '../event-card/event-card';
+import {EventListCard} from '../event-card/event-list-card';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatCard} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
@@ -13,7 +13,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-event-list',
   imports: [
-    EventCard,
+    EventListCard,
     MatPaginator,
     MatCard,
     MatButton,

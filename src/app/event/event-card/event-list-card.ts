@@ -21,9 +21,9 @@ import {DatePipe} from '@angular/common';
     MatChip,
     DatePipe
   ],
-  templateUrl: './event-card.html',
-  styleUrl: './event-card.css'
+  templateUrl: './event-list-card.html',
+  styleUrl: './event-list-card.css'
 })
-export class EventCard {
+export class EventListCard {
   event = input.required<EventSchema>()
 }
