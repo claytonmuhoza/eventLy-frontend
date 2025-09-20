@@ -20,23 +20,20 @@ import {EventDetailsAssociateArtist} from '../event-details-associate-artist/eve
 export class EventDetails {
     eventApi = inject(EventService);
     router = inject(ActivatedRoute);
-    eventId  = signal("");
+    eventId  = this.router.snapshot.params['id'];
     eventDetails  = signal<EventSchema | undefined>(undefined);
     ngOnInit() {
-      this.router.params.subscribe(params => {
-        this.eventId.set(params['id']);
         this.fetchDetailsEvent(this.eventId());
-      });
-
     }
     fetchDetailsEvent(eventId:string){
       this.eventApi.detailsEvents(eventId).subscribe(
         {
           next: eventDetails => {
             this.eventDetails.set(eventDetails)
-            console.log(eventDetails)
           },
-          error: (error : HttpErrorResponse)  => {}
+          error: (error : HttpErrorResponse)  => {
+            console.log(error)
+          }
         }
       )
     }
