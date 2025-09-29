@@ -49,12 +49,16 @@ export class EventDetailsAssociateArtist {
   getTitle(artistId: string): string {
     return this.artists().find((artist) => artist.id ===artistId)?.label || "";
   }
+  fetchAssociateArtistListener() {
+
+  }
   onSubmit() {
     if(this.associateArtistForm.valid && this.associateArtistForm.value.artistId) {
       this.eventService.associateArtisToAnEvent(this.eventId(), this.associateArtistForm.value.artistId).subscribe(
         {
           next: data => {
             console.log(data);
+            this.fetchAssociateArtistListener();
           },
           error: err => {
             console.log(err);
