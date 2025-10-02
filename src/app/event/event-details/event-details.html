@@ -4,7 +4,7 @@
   <section class="margin-botton">
    <app-event-details-card [eventDetails]="details"/>
   </section>
-  <app-event-details-associate-artist [eventId]="eventId"/>
+  <app-event-details-associate-artist (onArtistAdded)="handleArtistAdded($event)" [eventId]="eventId"/>
   <section class="margin-top">
     <app-event-details-artist-list [eventDetails]="details"/>
   </section>

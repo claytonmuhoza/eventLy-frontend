@@ -6,12 +6,28 @@
            aria-label="Associer un artiste"
            matInput
            formControlName="artistId"
-           [matAutocomplete]="auto">
+           [matAutocomplete]="auto"
+           [errorStateMatcher]="submittedErrorStateMatcher"
+    >
+
+
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
       @for (artist of artists(); track artist.id) {
         <mat-option [value]="artist.id">{{artist.label}}</mat-option>
       }
     </mat-autocomplete>
+
+      @if (artistIdControl.invalid && (artistIdControl.touched || artistIdControl.dirty || submitted)) {
+        <mat-error>
+        @if (artistIdControl.hasError('required')) {
+          Le nom de l'artiste est obligatoire.
+        } @else if (artistIdControl.hasError('artistAlreadyLinked')) {
+          L'artiste est déjà associé à l'événement.
+        } @else if (artistIdControl.hasError('ArtistIdInvalid')){
+          L'artiste n'existe pas
+        }
+        </mat-error>
+      }
   </mat-form-field>
   <button matButton="filled" type="submit" [disabled]="!associateArtistForm.valid">Associer</button>
 </form>
