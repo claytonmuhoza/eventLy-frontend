@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {EventDetailsCard} from '../event-details-card/event-details-card';
 import {EventDetailsArtistList} from '../event-details-artist-list/event-details-artist-list';
 import {EventDetailsAssociateArtist} from '../event-details-associate-artist/event-details-associate-artist';
+import {Artist} from '../../artist/models/artist';
 
 @Component({
   selector: 'app-event-details',
@@ -20,7 +21,7 @@ import {EventDetailsAssociateArtist} from '../event-details-associate-artist/eve
 export class EventDetails {
     eventApi = inject(EventService);
     router = inject(ActivatedRoute);
-    eventId  = this.router.snapshot.params['id'];
+    eventId:string  = this.router.snapshot.params['id'];
     eventDetails  = signal<EventSchema | undefined>(undefined);
     ngOnInit() {
         this.fetchDetailsEvent(this.eventId);
@@ -36,5 +37,8 @@ export class EventDetails {
           }
         }
       )
+    }
+    handleArtistAdded(Artist: Artist) {
+      console.log("added artist", Artist);
     }
 }
