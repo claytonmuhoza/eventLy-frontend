@@ -1,7 +1,10 @@
-@if(artists()){
-  @for (artist of artists()?.content; track artist.id){
-    <app-artist-card [artist]="artist"/>
-  }
+@let artists = this.artists();
+@if(artists){
+  <section class="artist-list">
+    @for (artist of artists.content; track artist.id){
+      <app-artist-card [artist]="artist"/>
+    }
+  </section>
 } @else {
   <section>An Error occur</section>
 }
