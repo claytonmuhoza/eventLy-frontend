@@ -7,13 +7,15 @@ import {EventDetailsCard} from '../event-details-card/event-details-card';
 import {EventDetailsArtistList} from '../event-details-artist-list/event-details-artist-list';
 import {EventDetailsAssociateArtist} from '../event-details-associate-artist/event-details-associate-artist';
 import {Artist} from '../../artist/models/artist';
+import {HttpError} from '../../shared/components/http-error/http-error';
 
 @Component({
   selector: 'app-event-details',
   imports: [
     EventDetailsCard,
     EventDetailsArtistList,
-    EventDetailsAssociateArtist
+    EventDetailsAssociateArtist,
+    HttpError
   ],
   templateUrl: './event-details.html',
   styleUrl: './event-details.css'
@@ -23,6 +25,7 @@ export class EventDetails {
     router = inject(ActivatedRoute);
     eventId:string  = this.router.snapshot.params['id'];
     eventDetails  = signal<EventSchema | undefined>(undefined);
+    error = signal<HttpErrorResponse | undefined>(undefined)
     ngOnInit() {
         this.fetchDetailsEvent(this.eventId);
     }
@@ -32,8 +35,8 @@ export class EventDetails {
           next: eventDetails => {
             this.eventDetails.set(eventDetails)
           },
-          error: (error : HttpErrorResponse)  => {
-            console.log(error)
+          error: (httpErrorResponse : HttpErrorResponse)  => {
+           this.error.set(httpErrorResponse);
           }
         }
       )
