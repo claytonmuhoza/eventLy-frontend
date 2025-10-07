@@ -49,10 +49,6 @@
     </div>
   }
   @if (error) {
-    <mat-card class="no-event-yet">
-      Une erreur s'est produit. Statut: {{
-        error.status
-      }}
-    </mat-card>
+    <app-http-error [error]="error"/>
   }
 }
