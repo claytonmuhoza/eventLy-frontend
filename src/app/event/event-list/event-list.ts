@@ -15,11 +15,11 @@ import {HttpError} from '../../shared/components/http-error/http-error';
   selector: 'app-event-list',
   imports: [
     EventListCard,
-    MatPaginator,
     MatCard,
     MatButton,
     RouterLink,
     MatProgressSpinner,
+    MatPaginator,
     HttpError,
   ],
   templateUrl: './event-list.html',

@@ -3,11 +3,13 @@ import {ArtistService} from '../services/artist-service';
 import {Page} from '../../shared/models/page';
 import {Artist} from '../models/artist';
 import {ArtistCard} from '../artist-card/artist-card';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-artist-list',
   imports: [
-    ArtistCard
+    ArtistCard,
+    MatPaginator
   ],
   templateUrl: './artist-list.html',
   styleUrl: './artist-list.css'
@@ -15,11 +17,16 @@ import {ArtistCard} from '../artist-card/artist-card';
 export class ArtistList {
   private artistService = inject(ArtistService);
   artists = signal<Page<Artist> | null>(null);
+  pageSize = signal(10);
+  page = signal(0);
   ngOnInit() {
+    this.fetchData();
+  }
+  fetchData() {
     this.artistService.listArtists({
-      page:0,
+      page:this.page(),
       sort: [],
-      size:10,
+      size:this.pageSize(),
     }).subscribe(
       {
         next: data => {
@@ -31,5 +38,10 @@ export class ArtistList {
         }
       }
     );
+  }
+  onPage(e: PageEvent) {
+    this.page.set(e.pageIndex);
+    this.pageSize.set(e.pageSize);
+    this.fetchData()
   }
 }
