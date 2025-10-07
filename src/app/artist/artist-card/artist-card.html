@@ -1,11 +1,28 @@
-<article>
-  <section>
-    {{artist().label}}
-  </section>
-  <section>
-    Number of events: {{artist().events.length}}
-  </section>
-  <section>
-    <a href="">Details</a>
-  </section>
-</article>
+<mat-card  class="artiste-list-card">
+  <a class="link-container" [routerLink]="'/artists/'+ artist().id">
+    <section class="left-container">
+      <mat-card class="first-letter-of-artist-card">
+        {{artist().label[0].toUpperCase()}}
+      </mat-card>
+      <div class="card-main-container">
+        <span>{{artist().label}} </span>
+        <div>
+          <div>
+            No event
+          </div>
+        </div>
+      </div>
+    </section>
+  </a>
+    <section>
+      <mat-card-content class="artist-card-content">
+        <mat-icon>local_activity</mat-icon>{{artist().events.length}}
+      </mat-card-content>
+      <mat-card-actions>
+        <section>
+          <a matButton="outlined"  >Détails</a>
+        </section>
+      </mat-card-actions>
+    </section>
+  </mat-card>
+

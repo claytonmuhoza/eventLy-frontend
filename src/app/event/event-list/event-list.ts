@@ -9,6 +9,7 @@ import {MatButton} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {HttpErrorResponse} from '@angular/common/http';
+import {HttpError} from '../../shared/components/http-error/http-error';
 
 @Component({
   selector: 'app-event-list',
@@ -19,6 +20,7 @@ import {HttpErrorResponse} from '@angular/common/http';
     MatButton,
     RouterLink,
     MatProgressSpinner,
+    HttpError,
   ],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css'
