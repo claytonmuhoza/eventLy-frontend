@@ -1,6 +1,6 @@
 <section>
   <mat-card class="even-form-container">
-    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="eventForm" (ngSubmit)="onCreateEvent()">
       <h2>Ajouter un nouveau événement</h2>
       <div>
         <mat-form-field class="event-field">
@@ -49,9 +49,14 @@
         </mat-form-field>
       </div>
       <div class="flex-center">
-        <button matButton="filled" [disabled]="!eventForm.valid"
+        <button matButton="filled" [disabled]="!eventForm.valid || submiting()"
         >
-          Créer l'événement
+
+          @if(submiting()){
+            Envoi en cours...
+          } @else {
+            Créer l'événement
+          }
         </button>
       </div>
     </form>
