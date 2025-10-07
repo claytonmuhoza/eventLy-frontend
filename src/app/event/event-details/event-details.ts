@@ -41,7 +41,13 @@ export class EventDetails {
         }
       )
     }
-    handleArtistAdded(Artist: Artist) {
-      console.log("added artist", Artist);
-    }
+  handleArtistAdded(artist: Artist): void {
+    this.eventDetails.update(currentEvent => {
+      if (currentEvent) {
+        currentEvent.artists = [artist,...(currentEvent.artists || [])]
+      }
+      return currentEvent
+    })
+    console.log(this.eventDetails())
+  }
 }
