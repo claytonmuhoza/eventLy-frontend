@@ -28,7 +28,7 @@
           }
         </section>
         <mat-paginator
-          [length]="events.totalElements ?? 0"
+          [length]="events.totalElements"
           [pageIndex]="page()"
           [pageSize]="pageSize()"
           [pageSizeOptions]="[5, 10, 25, 100]"
