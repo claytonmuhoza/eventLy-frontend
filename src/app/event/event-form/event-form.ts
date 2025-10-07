@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, effect, inject, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, effect, inject, signal, SimpleChanges} from '@angular/core';
 import {
   FormControl,
   FormGroupDirective,
@@ -45,7 +45,10 @@ export class EventForm {
     }
   )
   matcher = new MyErrorStateMatcher();
-  onSubmit(){
+  submiting = signal(false);
+  error = signal<HttpErrorResponse| undefined>(undefined);
+  onCreateEvent(){
+    this.submiting.set(true);
     if(this.eventForm.value.label && this.eventForm.value.startDate && this.eventForm.value.endDate){
       let eventData : EventWritingDto = new EventWritingDto(
         this.eventForm.value.label,
@@ -55,11 +58,12 @@ export class EventForm {
       this.eventApi.createEvents(eventData).subscribe(
         {
           next: eventData => {
-            console.log(eventData);
             this.router.navigate(['events', eventData.id]);
+            this.submiting.set(false);
           },
           error: (error : HttpErrorResponse) => {
-            console.error(error);
+            this.error.set(error);
+            this.submiting.set(false);
           }
         }
       )
