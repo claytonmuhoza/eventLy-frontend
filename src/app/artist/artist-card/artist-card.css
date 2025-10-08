@@ -15,7 +15,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: gray;
+}
+.artist-card-event-list-container .artist-card-event-container{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 .card-main-container{
   display: flex;
@@ -45,8 +49,8 @@
 }
 .artist-card-content{
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   font-size: 1.5rem;
-  gap: 1rem;
+  gap: 0.1rem;
 }

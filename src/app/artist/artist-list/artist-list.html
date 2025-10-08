@@ -1,5 +1,18 @@
 @let artists = this.artists();
-<h2>Liste des artistes</h2>
+<section class="header-container">
+  <app-artist-list-search (inputValue)="name.set($event)"/>
+  <div class="header-action-container">
+
+    <a routerLink="/artists/new" class="add-artist-btn" matButton="filled">
+      Nouveau
+    </a>
+  </div>
+</section>
+@if (onNameChange()){
+  <span>
+    Résultat de la recherche: {{onNameChange()}}
+  </span>
+}
 @if(artists){
   <section class="artist-list">
     @for (artist of artists.content; track artist.id){

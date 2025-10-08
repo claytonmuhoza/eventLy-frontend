@@ -15,11 +15,11 @@
                   <mat-icon>local_activity</mat-icon>{{artist.events.length}}:
               </mat-card-content>
             </span>
-          <section>
-          @for (event of artist.events.slice(0,2); track event.id){
+          <section class="artist-card-event-container">
+          @for (event of artist.events.slice(0,3); track event.id){
             <mat-chip class="flex-center">{{event.label}}</mat-chip>
           } @empty {
-            No event
+            Aucun événement
           }
             @if (artist.events.length>3){
               <mat-chip class="flex-center">Plus</mat-chip>
