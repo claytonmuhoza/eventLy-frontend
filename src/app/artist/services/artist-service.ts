@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {Page} from '../../shared/models/page';
-import {Artist} from '../models/artist';
+import {Artist, ArtistWritingDto, ArtistResponseDto} from '../models/artist';
 import {Pageable} from '../../shared/models/pageable';
 
 @Injectable({
@@ -21,6 +21,9 @@ export class ArtistService {
       params = params.append('sort', sortField);
     });
     return this.httpClient.get<Page<Artist>>(`${this.baseUrl}`, {params: params});
+  }
+  public create(artist:ArtistWritingDto):Observable<ArtistResponseDto>{
+    return this.httpClient.post<ArtistResponseDto>(`${this.baseUrl}`, artist);
   }
   public detailsArtist():Observable<Artist>{
     return this.httpClient.get<Artist>(`${this.baseUrl}`);

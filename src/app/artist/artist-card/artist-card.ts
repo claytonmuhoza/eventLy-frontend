@@ -19,8 +19,4 @@ import {MatChip} from '@angular/material/chips';
 })
 export class ArtistCard {
   artist = input.required<Artist>()
-
-  ngOnInit () {
-    console.log(this.artist(), 'artist');
-  }
 }

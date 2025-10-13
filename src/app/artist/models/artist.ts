@@ -5,3 +5,10 @@ export interface Artist {
  label: string;
  events: EventSchema[];
 }
+export interface ArtistWritingDto {
+  label: string;
+}
+export interface ArtistResponseDto{
+  id: number;
+  label: string;
+}

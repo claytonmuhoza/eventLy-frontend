@@ -1,32 +1,43 @@
 @let artists = this.artists();
+@let error = this.error();
+@let searchedArtistName = this.name();
 <section class="header-container">
-  <app-artist-list-search (inputValue)="name.set($event)"/>
+  <app-artist-list-search [(inputValue)]="name"/>
   <div class="header-action-container">
 
-    <a routerLink="/artists/new" class="add-artist-btn" matButton="filled">
+    <button (click)="openCreateArtistDialog()" class="add-artist-btn" matButton="filled">
       Nouveau
-    </a>
+    </button>
   </div>
 </section>
-@if (onNameChange()){
+@if (searchedArtistName){
   <span>
-    Résultat de la recherche: {{onNameChange()}}
+    {{(!artists || artists?.empty) ? "Aucun artiste trouvé" : artists?.totalElements || 0 + " artistes trouvés"}}
+    pour la recherche {{searchedArtistName}}
   </span>
 }
 @if(artists){
-  <section class="artist-list">
-    @for (artist of artists.content; track artist.id){
-      <app-artist-card [artist]="artist"/>
-    }
-  </section>
-  <mat-paginator
-    [length]="artists.totalElements"
-    [pageIndex]="page()"
-    [pageSize]="pageSize()"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    (page)="onPage($event)"
-    aria-label="Sélection de page">
-  </mat-paginator>
+  @if (artists.numberOfElements>0){
+    <section class="artist-list">
+      @for (artist of artists.content; track artist.id){
+        <app-artist-card [artist]="artist"/>
+      }
+    </section>
+    <mat-paginator
+      [length]="artists.totalElements"
+      [pageIndex]="page()"
+      [pageSize]="pageSize()"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="onPage($event)"
+      aria-label="Sélection de page">
+    </mat-paginator>
+  }@else{
+    <mat-card class="no-content">
+      Aucun artiste trouvé
+    </mat-card>
+  }
 } @else {
-  <section>An Error occur</section>
+  @if(error){
+    <app-http-error [error]="error"/>
+  }
 }
