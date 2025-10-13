@@ -50,8 +50,7 @@ export class ArtistList {
 
   }
   openCreateArtistDialog(): void {
-    const dialogRef = this.dialog.open(EventForm, {
-      height: '30rem',
+    const dialogRef = this.dialog.open(ArtistForm, {
       width: '32rem',
     });
 
