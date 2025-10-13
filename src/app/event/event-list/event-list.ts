@@ -10,6 +10,10 @@ import {RouterLink} from '@angular/router';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {HttpErrorResponse} from '@angular/common/http';
 import {HttpError} from '../../shared/components/http-error/http-error';
+import {toObservable} from '@angular/core/rxjs-interop';
+import {MatDialog} from '@angular/material/dialog';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {EventForm} from '../event-form/event-form';
 
 @Component({
   selector: 'app-event-list',
@@ -32,6 +36,14 @@ export class EventList {
   error = signal<HttpErrorResponse | undefined>(undefined);
   pageSize = signal(10);
   page = signal(0);
+  readonly dialog = inject(MatDialog);
+  openCreateEventDialog(): void {
+    const dialogRef = this.dialog.open(EventForm, {
+      width: '32rem',
+    });
+
+    dialogRef.afterClosed().subscribe();
+  }
   ngOnInit() {
     this.fetchData()
 
@@ -58,4 +70,6 @@ export class EventList {
     this.pageSize.set(e.pageSize);
     this.fetchData()
   }
+
+  protected readonly open = open;
 }

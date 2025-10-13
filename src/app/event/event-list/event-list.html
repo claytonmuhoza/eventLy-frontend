@@ -6,9 +6,9 @@
     Liste des événements
   </h2>
   <section>
-    <a routerLink="/events/new" matButton="filled">
+    <button (click)="openCreateEventDialog()" matButton="filled">
       Nouveau événement
-    </a>
+    </button>
   </section>
 </div>
 @if(events){
