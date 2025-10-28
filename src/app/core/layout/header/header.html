@@ -5,17 +5,18 @@
   <nav>
     <ul>
       <li>
-        <a routerLink="/">
+        <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{
+        exact:true}">
           Accueil
         </a>
       </li>
       <li>
-        <a routerLink="artists">
+        <a routerLink="artists" routerLinkActive="active-link">
           Artistes
         </a>
       </li>
       <li>
-        <a routerLink="events">
+        <a routerLink="events" routerLinkActive="active-link">
           Événements
         </a>
       </li>
