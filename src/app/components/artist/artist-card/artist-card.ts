@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {Artist} from '../models/artist';
+import {Artist} from '../../../models/artist';
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';

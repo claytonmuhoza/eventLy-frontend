@@ -3,8 +3,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
-import {ArtistService} from '../services/artist-service';
-import {ArtistWritingDto} from '../models/artist';
+import {ArtistService} from '../../../services/artist-service';
+import {ArtistWritingDto} from '../../../models/artist';
 import {HttpErrorResponse} from '@angular/common/http';
 import {
   MAT_DIALOG_DATA,

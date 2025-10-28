@@ -1,13 +1,13 @@
 import {Component, inject, signal} from '@angular/core';
-import {EventService} from '../event-service';
+import {EventService} from '../../../services/event-service';
 import {EventSchema} from '../models/event-schema';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {EventDetailsCard} from '../event-details-card/event-details-card';
 import {EventDetailsArtistList} from '../event-details-artist-list/event-details-artist-list';
 import {EventDetailsAssociateArtist} from '../event-details-associate-artist/event-details-associate-artist';
-import {Artist} from '../../artist/models/artist';
-import {HttpError} from '../../shared/components/http-error/http-error';
+import {Artist} from '../../../models/artist'
+import {HttpError} from '../../http-error/http-error';
 
 @Component({
   selector: 'app-event-details',

@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import {ArtistList} from './artist/artist-list/artist-list';
-import {ArtistDetails} from './artist/artist-details/artist-details';
-import {ArtistForm} from './artist/artist-form/artist-form';
-import {EventList} from './event/event-list/event-list';
-import {EventDetails} from './event/event-details/event-details';
-import {EventForm} from './event/event-form/event-form';
+import {ArtistList} from './components/artist/artist-list/artist-list';
+import {ArtistDetails} from './components/artist/artist-details/artist-details';
+import {ArtistForm} from './components/artist/artist-form/artist-form';
+import {EventList} from './components/event/event-list/event-list';
+import {EventDetails} from './components/event/event-details/event-details';
+import {EventForm} from './components/event/event-form/event-form';
 
 export const routes: Routes = [
   {

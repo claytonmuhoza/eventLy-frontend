@@ -1,14 +1,14 @@
 import {Component, computed, effect, EventEmitter, inject, signal} from '@angular/core';
-import {ArtistService} from '../services/artist-service';
-import {Page} from '../../shared/models/page';
-import {Artist} from '../models/artist';
+import {ArtistService} from '../../../services/artist-service';
+import {Page} from '../../../models/page';
+import {Artist} from '../../../models/artist';
 import {ArtistCard} from '../artist-card/artist-card';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ArtistListSearch} from '../artist-list-search/artist-list-search';
 import {MatButton} from '@angular/material/button';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
-import {HttpError} from '../../shared/components/http-error/http-error';
+import {HttpError} from '../../http-error/http-error';
 import {toObservable} from '@angular/core/rxjs-interop';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {MatCard} from '@angular/material/card';
