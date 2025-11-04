@@ -1,0 +1,22 @@
+.statistics-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+.statistics-container > *{
+  flex-grow: 1;
+  padding: 2rem 1rem;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.loading.flex-center{
+  margin-top: 3rem;
+  flex-direction: column;
+  gap: 2rem;
+}

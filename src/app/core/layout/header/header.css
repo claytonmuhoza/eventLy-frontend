@@ -28,14 +28,22 @@
 .main-header a.active-link{
   color: #005cbb;
 }
-.active-link::after{
+.main-header a:hover::after{
   content: "";
+  width: 100%;
+  height: 0.2rem;
+  display: block;
+  background: #011220;
+}
+.main-header a.active-link::after{
+  content: "";
+  margin: auto;
   display: block;
   width: 100%;
   height: 0.2rem;
   background-color: #005cbb;
   -webkit-animation: linear 0.2s link-change-width;;
-  animation: linear 0.2s  link-change-width;
+  animation: linear 0.3s  link-change-width;
 }
 @-webkit-keyframes link-change-width {
   from{

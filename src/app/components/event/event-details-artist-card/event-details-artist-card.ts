@@ -1,5 +1,5 @@
 import {Component, computed, input} from '@angular/core';
-import {Artist} from '../../artist/models/artist';
+import {Artist} from "../../../models/artist"
 import {MatFabButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatCard, MatCardActions, MatCardHeader} from '@angular/material/card';

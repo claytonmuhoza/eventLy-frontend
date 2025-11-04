@@ -14,8 +14,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCard} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
-import {EventService} from '../event-service';
-import {EventWritingDto} from '../models/event-writing-dto';
+import {EventService} from '../../../services/event-service';
+import {EventWritingDto} from '../../../models/event-writing-dto';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 /** Error when invalid control is dirty, touched, or submitted. */

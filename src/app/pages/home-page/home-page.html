@@ -1,0 +1,48 @@
+@let isLoading = this.isLoading();
+@let artists = this.artists();
+@let events = this.events();
+@if (isLoading){
+  <div class="loading flex-center">
+    <div>
+      <mat-spinner/>
+    </div>
+    <div>
+      Chargement...
+    </div>
+  </div>
+} @else {
+  <div class="statistics-container">
+    <mat-card>
+      <mat-card-header>
+        <h3>Artistes</h3>
+      </mat-card-header>
+      <mat-card-content>
+          @if (artists){
+          @for (artist of artists.content; track artist.id){
+            <div>{{artist.label}}</div>
+          } @empty {
+            Aucun artiste pour l'instant
+          }
+        } @else {
+          Aucun artiste pour l'instant
+        }
+      </mat-card-content>
+    </mat-card>
+    <mat-card >
+      <mat-card-header>
+        <h3>Evénements</h3>
+      </mat-card-header>
+      <mat-card-content>
+        @if (events){
+          @for (event of events.content; track event.id){
+            <div>{{event.label}}</div>
+          } @empty {
+            Aucun événement pour l'instant
+          }
+        } @else {
+          Aucun événement pour l'instant
+        }
+      </mat-card-content>
+    </mat-card>
+  </div>
+}

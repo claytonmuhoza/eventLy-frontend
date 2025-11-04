@@ -2,10 +2,10 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import {EventSchema} from './models/event-schema';
-import {Page} from '../shared/models/page';
-import {Pageable} from '../shared/models/pageable';
-import {EventWritingDto} from './models/event-writing-dto';
+import {EventSchema} from '../models/event-schema';
+import {Page} from '../models/page';
+import {Pageable} from '../models/pageable';
+import {EventWritingDto} from '../models/event-writing-dto';
 
 @Injectable({
   providedIn: 'root'

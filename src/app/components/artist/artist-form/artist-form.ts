@@ -20,7 +20,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-artist-form',
   imports: [
-    MatFormFieldModule, MatInputModule, MatIconModule, MatButton, FormsModule, ReactiveFormsModule, MatDialogTitle, MatDialogActions, MatDialogClose
+    MatFormFieldModule, MatInputModule, MatIconModule, MatButton, FormsModule, ReactiveFormsModule, MatDialogTitle, MatDialogActions,
   ],
   templateUrl: './artist-form.html',
   styleUrl: './artist-form.css'

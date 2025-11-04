@@ -1,4 +1,4 @@
-import {EventSchema} from '../../event/models/event-schema';
+import {EventSchema} from './event-schema';
 
 export interface Artist {
  id: string;

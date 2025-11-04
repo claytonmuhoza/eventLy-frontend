@@ -1,6 +1,6 @@
 import {Component, inject, signal} from '@angular/core';
 import {EventService} from '../../../services/event-service';
-import {EventSchema} from '../models/event-schema';
+import {EventSchema} from '../../../models/event-schema';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {EventDetailsCard} from '../event-details-card/event-details-card';

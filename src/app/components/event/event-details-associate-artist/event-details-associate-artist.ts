@@ -12,11 +12,11 @@ import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxj
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {ArtistService} from '../../artist/services/artist-service';
-import {Artist} from '../../artist/models/artist';
+import {ArtistService} from '../../../services/artist-service';
+import {Artist} from '../../../models/artist';
 import {MatButton} from '@angular/material/button';
-import {EventService} from '../event-service';
-import {SubmittedErrorStateMatcher} from '../../core/utils/submitted-error-state-matcher';
+import {EventService} from '../../../services/event-service';
+import {SubmittedErrorStateMatcher} from '../../../core/utils/submitted-error-state-matcher';
 @Component({
   selector: 'app-event-details-associate-artist',
   imports: [FormsModule,

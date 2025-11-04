@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {MatChip, MatChipSet} from "@angular/material/chips";
-import {EventSchema} from '../models/event-schema';
+import {EventSchema} from '../../../models/event-schema';
 
 @Component({
   selector: 'app-event-details-card',
