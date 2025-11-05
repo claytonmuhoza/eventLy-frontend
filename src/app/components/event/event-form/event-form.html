@@ -1,7 +1,28 @@
+@let error = this.error();
 <section>
   <mat-card class="even-form-container">
+
     <form [formGroup]="eventForm" (ngSubmit)="onCreateEvent()">
       <h2>Ajouter un nouveau événement</h2>
+      @if (error) {
+        <span class="error">
+        @switch (error.status) {
+          @case (0){
+            La connexion n'a pas pu être établie avec le serveur
+          }
+          @case (404){
+            L'élément n'a pas été trouvée
+          }
+          @case (500)
+          {
+            une erreur http serveur s'est produit. code: {{error.status}}
+          }
+          @default {
+            Une erreur http de statut {{error.status}} s'est produit
+          }
+        }
+        </span>
+      }
       <div>
         <mat-form-field class="event-field">
           <mat-label>Nom de l'événement</mat-label>
@@ -48,6 +69,7 @@
 
         </mat-form-field>
       </div>
+
       <div class="flex-center">
         <button matButton="filled" [disabled]="!eventForm.valid || submiting()"
         >

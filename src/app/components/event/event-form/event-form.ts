@@ -18,6 +18,7 @@ import {EventService} from '../../../services/event-service';
 import {EventWritingDto} from '../../../models/event-writing-dto';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {HttpError} from '../../http-error/http-error';
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -28,7 +29,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-event-form',
   imports: [
-    FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatCard, MatButton],
+    FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatCard, MatButton, HttpError],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './event-form.html',
@@ -54,7 +55,6 @@ export class EventForm {
         this.eventForm.value.label,
         this.eventForm.value.startDate,
         this.eventForm.value.endDate);
-       console.log(eventData);
       this.eventApi.createEvents(eventData).subscribe(
         {
           next: eventData => {
