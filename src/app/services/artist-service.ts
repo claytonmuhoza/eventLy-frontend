@@ -17,9 +17,7 @@ export class ArtistService {
       .set('page', pageable.page)
       .set('size', pageable.size)
       .set('label', label);
-    pageable.sort.forEach(sortField => {
-      params = params.append('sort', sortField);
-    });
+    pageable.sort.forEach(sortField => params.append('sort', sortField));
     return this.httpClient.get<Page<Artist>>(`${this.baseUrl}`, {params: params});
   }
   public create(artist:ArtistWritingDto):Observable<ArtistResponseDto>{

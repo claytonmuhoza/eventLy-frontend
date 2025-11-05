@@ -20,9 +20,7 @@ export class EventService {
     if (label){
       params.append('label', label);
     }
-    pageable.sort.forEach(sortField => {
-      params = params.append('sort', sortField);
-    });
+    pageable.sort.forEach(sortField => params.append('sort', sortField));
     return this.httpClient.get<Page<EventSchema>>(this.baseUrl, {params: params});
   }
   public createEvents(event:EventWritingDto): Observable<EventSchema>{
