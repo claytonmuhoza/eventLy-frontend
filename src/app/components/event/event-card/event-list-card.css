@@ -1,3 +1,26 @@
+.event-card{
+  transform-origin:center;
+  animation: ease-in 0.7s  card-scale;
+}
+@keyframes card-scale {
+  from {
+    transform: scale(0.5);
+  }
+  to{
+    transform: scale(1);
+  }
+
+}
+.list-artist-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.list-artist-container flex-center{
+  background: green;
+  width: 100%;
+  overflow: hidden;
+}
 .flex-center {
   display: flex;
   justify-content: center;

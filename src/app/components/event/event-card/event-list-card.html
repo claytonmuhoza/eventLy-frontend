@@ -1,5 +1,5 @@
 @let artists = this.event().artists;
-<mat-card appearance="outlined">
+<mat-card class="event-card" appearance="outlined">
   <mat-card-header>
     <mat-card-title>{{event().label}}</mat-card-title>
   </mat-card-header>
@@ -11,14 +11,14 @@
     </mat-chip-set>
     <div class="artist-number-container"><mat-icon>group</mat-icon> {{event().artists.length}}</div>
     @if (artists && artists.length!=0){
-      <mat-chip-set aria-label="Fish selection">
+      <section class="list-artist-container">
         @for (artist of artists.slice(0, 3); track artist.id){
           <mat-chip class="flex-center">{{artist.label}}</mat-chip>
         }
         @if (artists.length>3){
           <mat-chip class="flex-center">Plus d'artistes</mat-chip>
         }
-      </mat-chip-set>
+      </section>
     } @else {
       <div class="list-artist-no-content">
         Aucun artiste associé à cet événement
