@@ -1,0 +1,17 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.date-container {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.artist-number-container{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}

@@ -1,0 +1,36 @@
+@let artist = this.artist() ;
+<mat-card  class="artiste-list-card">
+  <a class="link-container" [routerLink]="'/artists/'+ artist.id">
+    <section class="left-container">
+      <mat-card class="first-letter-of-artist-card">
+        {{artist.label[0].toUpperCase()}}
+      </mat-card>
+      <section class="card-main-container">
+
+        <span>{{artist.label}} </span>
+
+        <div class="artist-card-event-list-container">
+            <span>
+              <mat-card-content class="artist-card-content">
+                  <mat-icon>local_activity</mat-icon>{{artist.events.length}}:
+              </mat-card-content>
+            </span>
+          <section class="artist-card-event-container">
+          @for (event of artist.events.slice(0,3); track event.id){
+            <mat-chip class="flex-center">{{event.label}}</mat-chip>
+          } @empty {
+            Aucun événement
+          }
+            @if (artist.events.length>3){
+              <mat-chip class="flex-center">Plus</mat-chip>
+            }
+          </section>
+        </div>
+      </section>
+    </section>
+  </a>
+    <section>
+
+    </section>
+  </mat-card>
+

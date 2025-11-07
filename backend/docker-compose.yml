@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  webapp:
+    build: .
+    container_name: webapp
+    ports:
+      - "9010:8080"  # accès local via http://localhost:8080
+    environment:
+      TZ: Europe/Paris
+
+      # ✅ H2 en mode fichier persistant
+      SPRING_DATASOURCE_URL: "jdbc:h2:file:/data/h2db/mydb"
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: "org.h2.Driver"
+      SPRING_DATASOURCE_USERNAME: "sa"
+      SPRING_DATASOURCE_PASSWORD: ""
+
+      # ✅ Dialect H2 explicite (évite l’erreur "Unable to determine Dialect")
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.H2Dialect"
+
+      # ✅ Mise à jour automatique du schéma au démarrage
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+
+      # (optionnel) pour activer la console web H2
+      # SPRING_H2_CONSOLE_ENABLED: "true"
+      # SPRING_H2_CONSOLE_PATH: "/h2-console"
+
+    volumes:
+      - app_data:/data  # volume persistant pour la base H2
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  app_data:

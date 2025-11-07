@@ -1,0 +1,18 @@
+<mat-card class="event-associate-artist-card">
+  <mat-card-header class="header-container">
+    <div class="artist-first-letter-icon .bg-green">
+      {{firstLetter()}}
+    </div>
+    <span class="artist-name">
+    {{artist().label}}
+    </span>
+  </mat-card-header>
+  <mat-card-actions class="action-container">
+    <button matFab>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <button matFab>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

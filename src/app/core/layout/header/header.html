@@ -1,24 +1,25 @@
-<header class="main-header">
+<mat-toolbar-row class="main-header">
   <h1>
     MyArt
   </h1>
   <nav>
     <ul>
       <li>
-        <a routerLink="/">
+        <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{
+        exact:true}">
           Accueil
         </a>
       </li>
       <li>
-        <a routerLink="artists">
+        <a routerLink="artists" routerLinkActive="active-link">
           Artistes
         </a>
       </li>
       <li>
-        <a routerLink="events">
+        <a routerLink="events" routerLinkActive="active-link">
           Événements
         </a>
       </li>
     </ul>
   </nav>
-</header>
+</mat-toolbar-row>

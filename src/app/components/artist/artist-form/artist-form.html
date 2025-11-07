@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Favorite Animal</h2>
+<form class="artist-form-container" [formGroup]="eventForm" (ngSubmit)="onCreate()">
+  <div>
+    <mat-form-field class="event-field">
+      <mat-label>Nom de l'artiste</mat-label>
+      <input type="text" matInput formControlName="label"  [errorStateMatcher]="matcher"
+             placeholder="Nom de l'artiste">
+      @if (eventForm.controls.label.hasError('required')) {
+        <mat-error>Le nom est <strong>obligatoire</strong></mat-error>
+      }
+      @if (eventForm.controls.label.hasError('minlength')) {
+        <mat-error>Le nom doit avoir <strong>au moins 3 caractères.</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+  <div>
+    <button matButton="filled">
+      Ajouter
+    </button>
+  </div>
+</form>
+<mat-dialog-actions>
+  <button (click)="onCloseDialog()" matButton>Annuler</button>
+</mat-dialog-actions>

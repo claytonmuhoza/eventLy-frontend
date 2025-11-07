@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {MatToolbarRow} from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-header',
   imports: [
-    RouterLink
+    RouterLink,
+    RouterLinkActive,
+    MatToolbarRow
   ],
   templateUrl: './header.html',
   styleUrl: './header.css'

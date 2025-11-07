@@ -1,0 +1,17 @@
+@let error = this.error();
+@if(error){
+  <app-http-error [error]="error"/>
+} @else {
+  @if (eventDetails())
+  {
+    <section class="margin-botton">
+      <app-event-details-card [eventDetails]="eventDetails()!"/>
+    </section>
+    <app-event-details-associate-artist (onArtistAdded)="handleArtistAdded($event)" [eventId]="eventId"/>
+    <section class="margin-top">
+      <app-event-details-artist-list [artists]="eventDetails()?.artists!"/>
+    </section>
+  }
+
+}
+

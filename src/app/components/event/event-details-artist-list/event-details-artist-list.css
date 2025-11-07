@@ -1,0 +1,11 @@
+.no-event-yet{
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.event-associate-artist-list{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+
+
