@@ -1,6 +1,0 @@
-projectKey=frontend-event
-serverUrl=http://localhost:9005
-serverVersion=25.10.0.114319
-dashboardUrl=http://localhost:9005/dashboard?id=frontend-event
-ceTaskId=e9a60172-c2e0-46e4-a72b-14a1a015d47e
-ceTaskUrl=http://localhost:9005/api/ce/task?id=e9a60172-c2e0-46e4-a72b-14a1a015d47e
