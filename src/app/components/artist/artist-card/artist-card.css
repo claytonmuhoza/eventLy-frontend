@@ -12,6 +12,16 @@
   text-overflow: ellipsis;
   justify-content: space-between;
   box-sizing: border-box;
+  transform-origin: center;
+  animation: ease-in 0.7s  card-scale;
+}
+@keyframes card-scale {
+  from {
+    transform: scale(0.5);
+  }
+  to{
+    transform: scale(1);
+  }
 
 }
 .artist-card-event-list-container{
