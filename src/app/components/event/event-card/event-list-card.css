@@ -17,8 +17,6 @@
   gap: 1rem;
 }
 .list-artist-container flex-center{
-  background: green;
-  width: 100%;
   overflow: hidden;
 }
 .flex-center {
