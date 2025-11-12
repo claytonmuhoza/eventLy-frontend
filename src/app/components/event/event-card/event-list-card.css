@@ -1,6 +1,26 @@
 .event-card{
   transform-origin:center;
-  animation: ease-in 0.7s  card-scale;
+  animation: ease-out 0.5s  card-scale;
+  height: 100%;
+  overflow: hidden;
+}
+.w-100{
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+.event-card > *{
+  width: 100%;
+  max-width: 100%;
+}
+.event-name{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 @keyframes card-scale {
   from {
@@ -13,11 +33,25 @@
 }
 .list-artist-container{
   display: grid;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+  width: calc(100% - 2rem);
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-.list-artist-container flex-center{
   overflow: hidden;
+}
+.list-artist-container .flex-center{
+  overflow: hidden;
+  align-self: stretch;
+  max-width: 100%;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border: 0.02rem solid #636363;
+  border-radius: 0.4rem;
+  text-align: center;
+  padding: 0.5rem;
 }
 .flex-center {
   display: flex;
