@@ -26,6 +26,9 @@ export class EventService {
   public createEvents(event:EventWritingDto): Observable<EventSchema>{
     return this.httpClient.post<EventSchema>(`${this.baseUrl}`, event);
   }
+  public updateEvents(event:EventWritingDto, id:string): Observable<EventSchema>{
+    return this.httpClient.put<EventSchema>(`${this.baseUrl}/${id}`, event);
+  }
   public detailsEvents(id: string): Observable<EventSchema>{
     return this.httpClient.get<EventSchema>(`${this.baseUrl}/${id}`);
   }

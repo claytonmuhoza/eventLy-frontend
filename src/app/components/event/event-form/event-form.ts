@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, effect, inject, signal, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, effect, inject, input, signal, SimpleChanges} from '@angular/core';
 import {
   FormControl,
   FormGroupDirective,
@@ -18,8 +18,8 @@ import {EventService} from '../../../services/event-service';
 import {EventWritingDto} from '../../../models/event-writing-dto';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {HttpError} from '../../http-error/http-error';
-/** Error when invalid control is dirty, touched, or submitted. */
+import {MatDialogRef} from '@angular/material/dialog';
+import {EventList} from '../event-list/event-list';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -29,7 +29,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-event-form',
   imports: [
-    FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatCard, MatButton, HttpError],
+    FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule, MatDatepickerModule, MatCard, MatButton],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './event-form.html',
@@ -38,6 +38,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class EventForm {
   eventApi = inject(EventService);
   router = inject(Router);
+  readonly dialogRef = inject(MatDialogRef<EventList>);
+  eventId = input<string|undefined>(undefined);
   eventForm = new FormGroup(
     {
       label: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
@@ -47,7 +49,7 @@ export class EventForm {
   )
   matcher = new MyErrorStateMatcher();
   submiting = signal(false);
-  error = signal<HttpErrorResponse| undefined>(undefined);
+  error: HttpErrorResponse | undefined;
   onCreateEvent(){
     this.submiting.set(true);
     if(this.eventForm.value.label && this.eventForm.value.startDate && this.eventForm.value.endDate){
@@ -55,21 +57,39 @@ export class EventForm {
         this.eventForm.value.label,
         this.eventForm.value.startDate,
         this.eventForm.value.endDate);
-      this.eventApi.createEvents(eventData).subscribe(
-        {
-          next: eventData => {
-            this.router.navigate(['events', eventData.id]);
-            this.submiting.set(false);
-          },
-          error: (error : HttpErrorResponse) => {
-            this.error.set(error);
-            this.submiting.set(false);
+      let eventId = this.eventId()
+      if(eventId){
+        this.eventApi.updateEvents(eventData, eventId).subscribe(
+          {
+            next: eventData => {
+              this.eventForm.reset();
+              this.dialogRef.close(true);
+              this.submiting.set(false);
+            },
+            error: (error : HttpErrorResponse) => {
+              this.error = error;
+              this.submiting.set(false);
+            }
           }
-        }
-      )
+        )
+      }else{
+        this.eventApi.createEvents(eventData).subscribe(
+          {
+            next: eventData => {
+              this.eventForm.reset();
+              this.router.navigate(['events', eventData.id]).then(
+                ()=> this.dialogRef.close(true),
+              );
+              this.submiting.set(false);
+            },
+            error: (error : HttpErrorResponse) => {
+              this.error = error;
+              this.submiting.set(false);
+            }
+          }
+        )
+      }
     }
-
-
 
   }
 }
