@@ -8,6 +8,8 @@ import {EventDetailsArtistList} from '../event-details-artist-list/event-details
 import {EventDetailsAssociateArtist} from '../event-details-associate-artist/event-details-associate-artist';
 import {Artist} from '../../../models/artist'
 import {HttpError} from '../../http-error/http-error';
+import {MatDialog} from '@angular/material/dialog';
+import {EventForm} from '../event-form/event-form';
 
 @Component({
   selector: 'app-event-details',
@@ -23,7 +25,8 @@ import {HttpError} from '../../http-error/http-error';
 export class EventDetails {
     eventApi = inject(EventService);
     router = inject(ActivatedRoute);
-    eventId:string  = this.router.snapshot.params['id'];
+  readonly dialog = inject(MatDialog);
+  eventId:string  = this.router.snapshot.params['id'];
     eventDetails  = signal<EventSchema | undefined>(undefined);
     error = signal<HttpErrorResponse | undefined>(undefined)
     ngOnInit() {
@@ -41,6 +44,17 @@ export class EventDetails {
         }
       )
     }
+  openCreateEventDialog(): void {
+    const dialogRef = this.dialog.open(EventForm, {
+      width: '32rem',
+      data: {
+        eventId: this.eventId,
+        eventDetails: this.eventDetails(),
+      }
+    });
+
+    dialogRef.afterClosed().subscribe();
+  }
   handleArtistAdded(artist: Artist): void {
     this.eventDetails.update(currentEvent => {
       if (currentEvent) {

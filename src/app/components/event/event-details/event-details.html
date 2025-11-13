@@ -4,8 +4,11 @@
 } @else {
   @if (eventDetails())
   {
-    <section class="margin-botton">
+    <section class="header-container margin-botton">
       <app-event-details-card [eventDetails]="eventDetails()!"/>
+      <button (click)="openCreateEventDialog()">
+        Modifier
+      </button>
     </section>
     <app-event-details-associate-artist (onArtistAdded)="handleArtistAdded($event)" [eventId]="eventId"/>
     <section class="margin-top">

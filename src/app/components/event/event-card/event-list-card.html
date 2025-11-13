@@ -7,7 +7,7 @@
     <mat-chip-set aria-label="Fish selection">
       <mat-chip class="flex-center">Début {{event().startDate | date:'dd/MM/yyy'}}</mat-chip>
       <mat-chip class="flex-center">
-        Fin {{event().startDate | date:'dd/MM/yyy'}}</mat-chip>
+        Fin {{event().endDate | date:'dd/MM/yyy'}}</mat-chip>
     </mat-chip-set>
     <div class="artist-number-container"><mat-icon>group</mat-icon> {{event().artists.length}}</div>
     @if (artists && artists.length!=0){
