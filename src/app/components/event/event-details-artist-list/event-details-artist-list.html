@@ -1,20 +1,16 @@
 @let artistsList = artists();
-@if (artistsList){
-  @if (artistsList.length == 0){
-    <mat-card class="no-event-yet">
-      Aucun artiste associé à l'événement
-    </mat-card>
+@if (artistsList) {
+  @if (artistsList.length === 0) {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">people_outline</mat-icon>
+      <p class="empty-text">Aucun artiste associé à l'événement</p>
+      <p class="empty-subtext">Utilisez le formulaire ci-dessus pour ajouter des artistes</p>
+    </div>
   } @else {
-    <section>
-      <h3>
-        Artistes liés à l'événement
-      </h3>
-      <section class="event-associate-artist-list">
-        @for (artist of artistsList; track artist.id){
-          <app-event-details-artist-card [artist]="artist"/>
-        }
-      </section>
-    </section>
+    <div class="artists-grid">
+      @for (artist of artistsList; track artist.id) {
+        <app-event-details-artist-card [artist]="artist"></app-event-details-artist-card>
+      }
+    </div>
   }
 }
-

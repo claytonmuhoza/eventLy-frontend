@@ -1,83 +1,96 @@
 <section>
-  <mat-card class="even-form-container">
-
+  <mat-card class="event-form-container">
     <form [formGroup]="eventForm" (ngSubmit)="onCreateEvent()">
-      <h2>Ajouter un nouveau événement</h2>
-      @if (error) {
-        <span class="error">
-        @switch (error.status) {
-          @case (0){
-            La connexion n'a pas pu être établie avec le serveur
-          }
-          @case (404){
-            L'élément n'a pas été trouvée
-          }
-          @case (500)
-          {
-            une erreur http serveur s'est produit. code: {{error.status}}
-          }
-          @default {
-            Une erreur http de statut {{error.status}} s'est produit
-          }
-        }
-        </span>
+      <h2>{{ data?.eventId ? 'Modifier l\'événement' : 'Ajouter un nouvel événement' }}</h2>
+      
+      @if (errorMessage()) {
+        <div class="error-banner">
+          {{ errorMessage() }}
+        </div>
       }
+
       <div>
         <mat-form-field class="event-field">
           <mat-label>Nom de l'événement</mat-label>
-          <input type="text" matInput formControlName="label"  [errorStateMatcher]="matcher"
-                 placeholder="Ex. Hellfest">
+          <input 
+            type="text" 
+            matInput 
+            formControlName="label" 
+            [errorStateMatcher]="matcher"
+            placeholder="Ex. Hellfest"
+          >
           @if (eventForm.controls.label.hasError('required')) {
             <mat-error>Le nom est <strong>obligatoire</strong></mat-error>
           }
           @if (eventForm.controls.label.hasError('minlength')) {
-            <mat-error>Le nom doit avoir <strong>au moins 3 caractères.</strong></mat-error>
+            <mat-error>Le nom doit avoir <strong>au moins 3 caractères</strong></mat-error>
           }
         </mat-form-field>
       </div>
+
       <div>
         <mat-form-field class="event-field">
-          <mat-label>Sélectioner la période</mat-label>
+          <mat-label>Sélectionner la période</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate placeholder="Début" formControlName="startDate">
-            <input matEndDate placeholder="Fin" formControlName="endDate" [errorStateMatcher]="matcher">
+            <input 
+              matStartDate 
+              placeholder="Début" 
+              formControlName="startDate"
+              [errorStateMatcher]="matcher"
+            >
+            <input 
+              matEndDate 
+              placeholder="Fin" 
+              formControlName="endDate" 
+              [errorStateMatcher]="matcher"
+            >
           </mat-date-range-input>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
-          @if (eventForm.controls.startDate.hasError("matStartDateInvalid")){
+          
+          @if (eventForm.hasError('invalidDateRange')) {
             <mat-error>
-              La date de début doit être antérieure à la date de fin.
+              La date de début doit être antérieure à la date de fin
             </mat-error>
           }
-          @if (eventForm.controls.startDate.hasError("required") && eventForm.controls.endDate.hasError("required") ) {
+          @if (eventForm.controls.startDate.hasError('pastDate')) {
+            <mat-error>
+              La date de début doit être dans le futur
+            </mat-error>
+          }
+          @if (eventForm.controls.endDate.hasError('pastDate')) {
+            <mat-error>
+              La date de fin doit être dans le futur
+            </mat-error>
+          }
+          @if (eventForm.controls.startDate.hasError('required') || eventForm.controls.endDate.hasError('required')) {
             <mat-error>
               La période est obligatoire
             </mat-error>
-          } @else {
-            @if (eventForm.controls.startDate.hasError("required")){
-              <mat-error>
-                La date de début est obligatoire
-              </mat-error>
-            }
-            @if (eventForm.controls.endDate.hasError("required")){
-              <mat-error>
-                La date de fin est obligatoire
-              </mat-error>
-            }
           }
-
         </mat-form-field>
       </div>
 
-      <div class="flex-center">
-        <button matButton="filled" [disabled]="!eventForm.valid || submiting()"
+      <div class="button-container">
+        <button 
+          type="button"
+          mat-button 
+          (click)="onCancel()"
+          [disabled]="submitting()"
         >
-
-          @if(submiting()){
+          Annuler
+        </button>
+        <button 
+          type="submit"
+          mat-flat-button 
+          color="primary"
+          [disabled]="!eventForm.valid || submitting()"
+        >
+          @if (submitting()) {
             Envoi en cours...
           } @else {
-            @if (this.data){
-              Mettre à jours
+            @if (data?.eventId) {
+              Mettre à jour
             } @else {
               Créer l'événement
             }
@@ -85,7 +98,5 @@
         </button>
       </div>
     </form>
-
   </mat-card>
-
 </section>

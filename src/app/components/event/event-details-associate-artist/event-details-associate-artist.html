@@ -1,33 +1,50 @@
-<form  class="align-center" [formGroup]="associateArtistForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="example-full-width">
-    <mat-label>Associer un artiste</mat-label>
-    <input type="text"
-           placeholder="Nom de l'artiste"
-           aria-label="Associer un artiste"
-           matInput
-           formControlName="artistId"
-           [matAutocomplete]="auto"
-           [errorStateMatcher]="submittedErrorStateMatcher"
-    >
+<form [formGroup]="associateArtistForm" (ngSubmit)="onSubmit()" class="associate-form">
+  <div class="form-header">
+    <mat-icon class="form-icon">person_add</mat-icon>
+    <h3 class="form-title">Associer un artiste</h3>
+  </div>
 
-
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
-      @for (artist of artists(); track artist.id) {
-        <mat-option [value]="artist.id">{{artist.label}}</mat-option>
-      }
-    </mat-autocomplete>
+  <div class="form-content">
+    <mat-form-field appearance="outline" class="artist-field">
+      <mat-label>Rechercher un artiste</mat-label>
+      <input 
+        type="text"
+        matInput
+        formControlName="artistId"
+        [matAutocomplete]="auto"
+        [errorStateMatcher]="submittedErrorStateMatcher"
+        placeholder="Commencez à taper...">
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-autocomplete 
+        #auto="matAutocomplete" 
+        [displayWith]="getTitle.bind(this)">
+        @for (artist of artists(); track artist.id) {
+          <mat-option [value]="artist.id">
+            {{artist.label}}
+          </mat-option>
+        }
+      </mat-autocomplete>
 
       @if (artistIdControl.invalid && (artistIdControl.touched || artistIdControl.dirty || submitted)) {
         <mat-error>
-        @if (artistIdControl.hasError('required')) {
-          Le nom de l'artiste est obligatoire.
-        } @else if (artistIdControl.hasError('artistAlreadyLinked')) {
-          L'artiste est déjà associé à l'événement.
-        } @else if (artistIdControl.hasError('ArtistIdInvalid')){
-          L'artiste n'existe pas
-        }
+          @if (artistIdControl.hasError('required')) {
+            Le nom de l'artiste est obligatoire.
+          } @else if (artistIdControl.hasError('artistAlreadyLinked')) {
+            L'artiste est déjà associé à l'événement.
+          } @else if (artistIdControl.hasError('ArtistIdInvalid')){
+            L'artiste n'existe pas
+          }
         </mat-error>
       }
-  </mat-form-field>
-  <button matButton="filled" type="submit" [disabled]="!associateArtistForm.valid">Associer</button>
+    </mat-form-field>
+
+    <button 
+      mat-raised-button 
+      color="primary" 
+      type="submit"
+      class="submit-button">
+      <mat-icon>add</mat-icon>
+      Associer
+    </button>
+  </div>
 </form>

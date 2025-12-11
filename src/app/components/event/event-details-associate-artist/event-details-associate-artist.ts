@@ -15,15 +15,20 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ArtistService} from '../../../services/artist-service';
 import {Artist} from '../../../models/artist';
 import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 import {EventService} from '../../../services/event-service';
 import {SubmittedErrorStateMatcher} from '../../../core/utils/submitted-error-state-matcher';
+
 @Component({
   selector: 'app-event-details-associate-artist',
-  imports: [FormsModule,
+  imports: [
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    ReactiveFormsModule, MatButton,
+    ReactiveFormsModule, 
+    MatButton,
+    MatIcon
   ],
   templateUrl: './event-details-associate-artist.html',
   styleUrl: './event-details-associate-artist.css'
@@ -33,7 +38,6 @@ export class EventDetailsAssociateArtist {
   eventId = input.required<string>();
   //signals
   selectedArtist = signal<Artist | undefined>(undefined)
-  isArtistAlreadyLinkedWithEvent = signal<boolean>(false);
   artists = signal<Artist[]>([]);
   //services
   private readonly eventService = inject(EventService);
@@ -67,7 +71,7 @@ export class EventDetailsAssociateArtist {
   };
 
   associateArtistForm = new FormGroup({
-    artistId: new FormControl<string>('', {
+    artistId: new FormControl('', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -98,14 +102,16 @@ export class EventDetailsAssociateArtist {
       error: err => console.error(err)
     });
   }
+
   getTitle(artistId: string): string {
-    let artist  =  this.artists().find((artist) => artist.id ===artistId);
-    this.selectedArtist.set(artist);
-    if(this.selectedArtist()?.events.some(event =>event.id == this.eventId())){
-      this.isArtistAlreadyLinkedWithEvent.set(true);
+    if (!artistId) return "";
+    const artist = this.artists().find((a) => a.id === artistId);
+    if (artist) {
+      this.selectedArtist.set(artist);
     }
     return artist?.label || "";
   }
+
   onSubmit() {
     this.submitted = true;
 
@@ -113,18 +119,25 @@ export class EventDetailsAssociateArtist {
       this.associateArtistForm.markAllAsTouched();
       return;
     }
-    if(this.associateArtistForm.valid && this.associateArtistForm.value.artistId) {
-      this.eventService.associateArtisToAnEvent(this.eventId(), this.associateArtistForm.value.artistId).subscribe(
-        {
-          next: data => {
-            let artist = this.selectedArtist();
-            artist && this.onArtistAdded.emit(artist);
-          },
-          error: err => {
-            console.log(err);
+
+    if (this.associateArtistForm.valid && this.associateArtistForm.value.artistId) {
+      this.eventService.associateArtisToAnEvent(
+        this.eventId(), 
+        this.associateArtistForm.value.artistId
+      ).subscribe({
+        next: data => {
+          const artist = this.selectedArtist();
+          if (artist) {
+            this.onArtistAdded.emit(artist);
+            // Réinitialiser le formulaire après succès
+            this.associateArtistForm.reset();
+            this.submitted = false;
           }
+        },
+        error: err => {
+          console.error('Erreur lors de l\'association:', err);
         }
-      )
+      });
     }
   }
 }

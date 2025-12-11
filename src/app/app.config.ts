@@ -9,7 +9,6 @@ import {getFrenchPaginatorIntl} from './core/utils/get-french-paginator-intl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     { provide: MatPaginatorIntl, useValue: getFrenchPaginatorIntl()},
     provideHttpClient(),
     provideBrowserGlobalErrorListeners(),

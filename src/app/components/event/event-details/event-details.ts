@@ -3,20 +3,22 @@ import {EventService} from '../../../services/event-service';
 import {EventSchema} from '../../../models/event-schema';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
-import {EventDetailsCard} from '../event-details-card/event-details-card';
 import {EventDetailsArtistList} from '../event-details-artist-list/event-details-artist-list';
 import {EventDetailsAssociateArtist} from '../event-details-associate-artist/event-details-associate-artist';
 import {Artist} from '../../../models/artist'
 import {HttpError} from '../../http-error/http-error';
 import {MatDialog} from '@angular/material/dialog';
 import {EventForm} from '../event-form/event-form';
+import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-event-details',
   imports: [
-    EventDetailsCard,
     EventDetailsArtistList,
     EventDetailsAssociateArtist,
+    MatIcon,
+    MatButtonModule,
     HttpError
   ],
   templateUrl: './event-details.html',
@@ -53,7 +55,13 @@ export class EventDetails {
       }
     });
 
-    dialogRef.afterClosed().subscribe();
+    dialogRef.afterClosed().subscribe(result =>
+    {
+      if(result){
+        this.eventDetails.set(result);
+      }
+    }
+    );
   }
   handleArtistAdded(artist: Artist): void {
     this.eventDetails.update(currentEvent => {

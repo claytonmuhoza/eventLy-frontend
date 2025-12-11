@@ -4,16 +4,38 @@
 } @else {
   @if (eventDetails())
   {
-    <section class="header-container margin-botton">
-      <app-event-details-card [eventDetails]="eventDetails()!"/>
-      <button (click)="openCreateEventDialog()">
-        Modifier
-      </button>
-    </section>
-    <app-event-details-associate-artist (onArtistAdded)="handleArtistAdded($event)" [eventId]="eventId"/>
-    <section class="margin-top">
-      <app-event-details-artist-list [artists]="eventDetails()?.artists!"/>
-    </section>
+     <div class="event-details-container">
+      <div class="page-header">
+        <h1 class="page-title">Détails de l'événement</h1>
+        <button mat-raised-button color="primary" (click)="openCreateEventDialog()">
+          <mat-icon>edit</mat-icon>
+          Modifier
+        </button>
+      </div>
+      <!-- Carte principale de l'événement -->
+      <div class="event-main-section">
+      </div>
+      <!-- Section artistes -->
+      <div class="artists-section">
+        <div class="section-header">
+          <h2 class="section-title">Artistes</h2>
+        </div>
+
+        <!-- Formulaire d'association d'artiste -->
+        <div class="associate-artist-wrapper">
+          <app-event-details-associate-artist 
+            [eventId]="eventId"
+            (onArtistAdded)="handleArtistAdded($event)">
+          </app-event-details-associate-artist>
+        </div>
+
+        <!-- Liste des artistes -->
+        <div class="artists-list-wrapper">
+          <app-event-details-artist-list [artists]="eventDetails()?.artists!">
+          </app-event-details-artist-list>
+        </div>
+      </div>
+     </div>
   }
 
 }

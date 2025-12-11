@@ -1,16 +1,31 @@
-.even-form-container {
-  max-width: 30rem;
-  padding: 1rem;
-  margin: 2rem auto;
+.event-form-container {
+  max-width: 35rem;
+  padding: 2rem;
 }
-.event-field{
+
+.event-field {
   width: 100%;
+  margin-bottom: 1rem;
 }
-.flex-center{
+
+.button-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
 }
-.error{
-  color: red;
+
+.error-banner {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+  border-left: 0.25rem solid #c62828;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #333;
 }
