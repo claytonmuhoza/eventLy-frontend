@@ -11,11 +11,13 @@ import {MatDialog} from '@angular/material/dialog';
 import {EventForm} from '../event-form/event-form';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { EventDetailsCard } from '../event-details-card/event-details-card';
 
 @Component({
   selector: 'app-event-details',
   imports: [
     EventDetailsArtistList,
+    EventDetailsCard,
     EventDetailsAssociateArtist,
     MatIcon,
     MatButtonModule,

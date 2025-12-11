@@ -1,18 +1,26 @@
-<mat-card class="event-associate-artist-card">
-  <mat-card-header class="header-container">
-    <div class="artist-first-letter-icon .bg-green">
-      {{firstLetter()}}
+<mat-card class="artist-card">
+  <mat-card-content class="card-content">
+    <div class="artist-info">
+      <div class="artist-avatar" [style.background-color]="getAvatarColor()">
+        <span class="avatar-letter">{{firstLetter()}}</span>
+      </div>
+      <div class="artist-details">
+        <h3 class="artist-name">{{artist().label}}</h3>
+        @if (artist().events && artist().events.length > 0) {
+          <p class="artist-events-count">
+            <mat-icon class="count-icon">event</mat-icon>
+            {{artist().events.length}} événement{{artist().events.length > 1 ? 's' : ''}}
+          </p>
+        }
+      </div>
     </div>
-    <span class="artist-name">
-    {{artist().label}}
-    </span>
-  </mat-card-header>
-  <mat-card-actions class="action-container">
-    <button matFab>
-      <mat-icon>more_vert</mat-icon>
+    
+    <button 
+      mat-icon-button 
+      class="delete-button"
+      aria-label="Dissocier l'artiste"
+      matTooltip="Dissocier cet artiste">
+      <mat-icon>close</mat-icon>
     </button>
-    <button matFab>
-      <mat-icon>delete</mat-icon>
-    </button>
-  </mat-card-actions>
+  </mat-card-content>
 </mat-card>

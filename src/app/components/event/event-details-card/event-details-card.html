@@ -1,0 +1,40 @@
+<mat-card class="event-card">
+  <mat-card-content class="event-content">
+    <!-- En-tête avec icône et titre -->
+    <div class="event-header">
+      <div class="event-icon-wrapper">
+        <mat-icon class="event-icon">celebration</mat-icon>
+      </div>
+      <h2 class="event-title">{{eventDetails().label}}</h2>
+    </div>
+
+    <!-- Informations de dates -->
+    <div class="event-dates">
+      <div class="date-item">
+        <mat-icon class="date-icon">event</mat-icon>
+        <div class="date-info">
+          <span class="date-label">Début</span>
+          <span class="date-value">{{eventDetails().startDate | date:'dd MMMM yyyy':'':'fr'}}</span>
+        </div>
+      </div>
+
+      <div class="date-separator">
+        <mat-icon>arrow_forward</mat-icon>
+      </div>
+
+      <div class="date-item">
+        <mat-icon class="date-icon">event</mat-icon>
+        <div class="date-info">
+          <span class="date-label">Fin</span>
+          <span class="date-value">{{eventDetails().endDate | date:'dd MMMM yyyy':'':'fr'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Durée de l'événement -->
+    <div class="event-duration">
+      <mat-icon class="duration-icon">schedule</mat-icon>
+      <span class="duration-text">Durée : {{getDuration()}} jour{{getDuration() > 1 ? 's' : ''}}</span>
+    </div>
+  </mat-card-content>
+</mat-card>
