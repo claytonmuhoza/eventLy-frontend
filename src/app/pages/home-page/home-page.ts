@@ -1,5 +1,5 @@
 import {Component, inject, signal} from '@angular/core';
-import {MatCard, MatCardContent, MatCardHeader} from '@angular/material/card';
+import {MatCard, MatCardContent} from '@angular/material/card';
 import {ArtistService} from '../../services/artist-service';
 import {Page} from '../../models/page';
 import {Artist} from '../../models/artist';
@@ -8,15 +8,16 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {finalize, fromEvent} from 'rxjs';
 import {EventSchema} from '../../models/event-schema';
 import {EventService} from '../../services/event-service';
+import { MatAnchor } from "@angular/material/button";
 
 @Component({
   selector: 'app-home-page',
   imports: [
     MatCard,
     MatProgressSpinner,
-    MatCardHeader,
-    MatCardContent
-  ],
+    MatCardContent,
+    MatAnchor
+],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css'
 })

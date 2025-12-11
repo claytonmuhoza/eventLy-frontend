@@ -1,25 +1,84 @@
 <mat-toolbar-row class="main-header">
-  <h1>
-    MyArt
-  </h1>
-  <nav>
+  <!-- Bouton menu mobile (à gauche sur mobile) -->
+  <button 
+    mat-icon-button 
+    class="mobile-menu-button"
+    (click)="toggleMobileMenu()"
+    [attr.aria-expanded]="mobileMenuOpen()"
+    aria-label="Toggle menu">
+    <mat-icon>{{ mobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
+  </button>
+
+  <h1 class="logo">MyArt</h1>
+  
+  <!-- Menu desktop (centré) -->
+  <nav class="desktop-nav" aria-label="Navigation principale">
     <ul>
       <li>
-        <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{
-        exact:true}">
+        <a 
+          routerLink="/" 
+          routerLinkActive="active-link" 
+          [routerLinkActiveOptions]="{exact: true}"
+          aria-label="Accueil">
           Accueil
         </a>
       </li>
       <li>
-        <a routerLink="artists" routerLinkActive="active-link">
+        <a 
+          routerLink="artists" 
+          routerLinkActive="active-link"
+          aria-label="Artistes">
           Artistes
         </a>
       </li>
       <li>
-        <a routerLink="events" routerLinkActive="active-link">
+        <a 
+          routerLink="events" 
+          routerLinkActive="active-link"
+          aria-label="Événements">
           Événements
         </a>
       </li>
     </ul>
   </nav>
+
+  <!-- Espaceur pour équilibrer le layout sur mobile -->
+  <div class="header-spacer"></div>
 </mat-toolbar-row>
+
+<!-- Menu mobile -->
+<nav 
+  class="mobile-nav" 
+  [class.open]="mobileMenuOpen()"
+  aria-label="Navigation mobile">
+  <ul>
+    <li>
+      <a 
+        routerLink="/" 
+        routerLinkActive="active-link" 
+        [routerLinkActiveOptions]="{exact: true}"
+        (click)="closeMobileMenu()"
+        aria-label="Accueil">
+        Accueil
+      </a>
+    </li>
+    <li>
+      <a 
+        routerLink="artists" 
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()"
+        aria-label="Artistes">
+        Artistes
+      </a>
+    </li>
+    <li>
+      <a 
+        routerLink="events" 
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()"
+        aria-label="Événements">
+        Événements
+      </a>
+    </li>
+  </ul>
+</nav>

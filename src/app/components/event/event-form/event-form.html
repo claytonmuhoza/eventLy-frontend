@@ -76,7 +76,11 @@
           @if(submiting()){
             Envoi en cours...
           } @else {
-            Créer l'événement
+            @if (this.data){
+              Mettre à jours
+            } @else {
+              Créer l'événement
+            }
           }
         </button>
       </div>

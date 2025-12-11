@@ -18,7 +18,7 @@ import {EventService} from '../../../services/event-service';
 import {EventWritingDto} from '../../../models/event-writing-dto';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {EventList} from '../event-list/event-list';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,11 +40,12 @@ export class EventForm {
   router = inject(Router);
   readonly dialogRef = inject(MatDialogRef<EventList>);
   eventId = input<string|undefined>(undefined);
+  data= inject(MAT_DIALOG_DATA);
   eventForm = new FormGroup(
     {
-      label: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
-      startDate: new FormControl<Date>(new Date(), [Validators.required]),
-      endDate: new FormControl<Date>(new Date(), [Validators.required]),
+      label: new FormControl<string>(this.data?this.data.eventDetails.label:'', [Validators.required, Validators.minLength(3)]),
+      startDate: new FormControl<Date>(this.data?new Date(this.data.eventDetails.startDate): new Date(), [Validators.required]),
+      endDate: new FormControl<Date>(this.data?new Date(this.data.eventDetails.endDate) : new Date(), [Validators.required]),
     }
   )
   matcher = new MyErrorStateMatcher();
@@ -57,13 +58,16 @@ export class EventForm {
         this.eventForm.value.label,
         this.eventForm.value.startDate,
         this.eventForm.value.endDate);
-      let eventId = this.eventId()
-      if(eventId){
-        this.eventApi.updateEvents(eventData, eventId).subscribe(
+      if(this.data && this.data.eventId){
+        this.eventApi.updateEvents(eventData, this.data.eventId).subscribe(
           {
             next: eventData => {
-              this.eventForm.reset();
+              this.router.navigate(['events', eventData.id]).then(
+                ()=> this.dialogRef.close(true),
+              );
+
               this.dialogRef.close(true);
+              this.eventForm.reset();
               this.submiting.set(false);
             },
             error: (error : HttpErrorResponse) => {
@@ -76,10 +80,10 @@ export class EventForm {
         this.eventApi.createEvents(eventData).subscribe(
           {
             next: eventData => {
-              this.eventForm.reset();
               this.router.navigate(['events', eventData.id]).then(
                 ()=> this.dialogRef.close(true),
               );
+              this.eventForm.reset();
               this.submiting.set(false);
             },
             error: (error : HttpErrorResponse) => {

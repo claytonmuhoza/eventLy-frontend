@@ -1,46 +1,94 @@
 @let isLoading = this.isLoading();
 @let artists = this.artists();
 @let events = this.events();
-@if (isLoading){
-  <div class="loading flex-center">
-    <div>
-      <mat-spinner/>
-    </div>
-    <div>
-      Chargement...
-    </div>
+
+@if (isLoading) {
+  <div class="loading-container">
+    <mat-spinner />
+    <p>Chargement...</p>
   </div>
 } @else {
-  <div class="statistics-container">
-    <mat-card>
-      <mat-card-header>
-        <h3>Artistes</h3>
-      </mat-card-header>
-      <mat-card-content>
-          @if (artists){
-          @for (artist of artists.content; track artist.id){
-            <div>{{artist.label}}</div>
-          } @empty {
-            Aucun artiste pour l'instant
-          }
+  <div class="home-container">
+    <!-- Section Artistes -->
+    <mat-card class="preview-card artists-card">
+      <div class="card-header">
+        <div class="icon-container">
+          <svg class="microphone-icon" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+            <!-- Corps du micro -->
+            <rect x="35" y="20" width="30" height="50" rx="15" class="mic-body"/>
+            <!-- Grille du micro -->
+            <line x1="40" y1="30" x2="40" y2="60" class="mic-line" stroke-width="1.5"/>
+            <line x1="45" y1="30" x2="45" y2="60" class="mic-line" stroke-width="1.5"/>
+            <line x1="50" y1="30" x2="50" y2="60" class="mic-line" stroke-width="1.5"/>
+            <line x1="55" y1="30" x2="55" y2="60" class="mic-line" stroke-width="1.5"/>
+            <line x1="60" y1="30" x2="60" y2="60" class="mic-line" stroke-width="1.5"/>
+            <!-- Support -->
+            <path d="M 30 70 Q 30 85, 50 85 Q 70 85, 70 70" class="mic-support" fill="none" stroke-width="3"/>
+            <line x1="50" y1="85" x2="50" y2="110" class="mic-stand" stroke-width="3"/>
+            <line x1="35" y1="110" x2="65" y2="110" class="mic-base" stroke-width="4"/>
+            <!-- Ondes sonores animées -->
+            <g class="sound-waves">
+              <path d="M 75 35 Q 80 35, 80 45 Q 80 55, 75 55" class="wave wave-1" fill="none" stroke-width="2"/>
+              <path d="M 82 30 Q 90 30, 90 45 Q 90 60, 82 60" class="wave wave-2" fill="none" stroke-width="2"/>
+              <path d="M 89 25 Q 100 25, 100 45 Q 100 65, 89 65" class="wave wave-3" fill="none" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+        <h2>
+          @if (artists && artists.content && artists.content.length > 0) {
+          {{ artists.totalElements }} artiste{{ artists.totalElements > 1 ? 's' : '' }}
         } @else {
-          Aucun artiste pour l'instant
+          <p class="empty-state">Artistes</p>
+        }
+        </h2>
+      </div>
+      
+      <mat-card-content>
+        @if (artists && artists.content && artists.content.length > 0) {
+          <a matButton="filled" routerLink="artists" class="view-all-btn">
+            Voir tous les artistes
+          </a>
+        } @else {
+          <p class="empty-state">Aucun artiste pour l'instant</p>
         }
       </mat-card-content>
     </mat-card>
-    <mat-card >
-      <mat-card-header>
-        <h3>Evénements</h3>
-      </mat-card-header>
+
+    <!-- Section Événements -->
+    <mat-card class="preview-card events-card">
+      <div class="card-header">
+        <div class="icon-container">
+          <svg class="vinyl-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Disque vinyl -->
+            <circle cx="50" cy="50" r="45" class="vinyl-disk"/>
+            <!-- Cercles concentriques -->
+            <circle cx="50" cy="50" r="35" class="vinyl-groove" fill="none" stroke-width="0.5"/>
+            <circle cx="50" cy="50" r="30" class="vinyl-groove" fill="none" stroke-width="0.5"/>
+            <circle cx="50" cy="50" r="25" class="vinyl-groove" fill="none" stroke-width="0.5"/>
+            <circle cx="50" cy="50" r="20" class="vinyl-groove" fill="none" stroke-width="0.5"/>
+            <!-- Label central -->
+            <circle cx="50" cy="50" r="15" class="vinyl-label"/>
+            <!-- Centre -->
+            <circle cx="50" cy="50" r="3" class="vinyl-center"/>
+            <!-- Reflet -->
+            <path d="M 30 30 Q 35 45, 30 60" class="vinyl-shine" fill="none" stroke-width="2"/>
+          </svg>
+        </div>
+        <h2>
+          @if (events && events.content && events.content.length > 0) {
+          {{ events.totalElements }} événement{{ events.totalElements > 1 ? 's' : '' }}
+        }@else {
+          événements
+        }
+        </h2>
+      </div>
       <mat-card-content>
-        @if (events){
-          @for (event of events.content; track event.id){
-            <div>{{event.label}}</div>
-          } @empty {
-            Aucun événement pour l'instant
-          }
+        @if (events && events.content && events.content.length > 0) {
+          <a matButton="filled" routerLink="events" class="view-all-btn">
+            Voir tous les événements
+          </a>
         } @else {
-          Aucun événement pour l'instant
+          <p class="empty-state">Aucun événement pour l'instant</p>
         }
       </mat-card-content>
     </mat-card>

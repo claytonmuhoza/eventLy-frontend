@@ -1,63 +1,233 @@
+/* Header principal */
 .main-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0 calc(8rem / 2);
+  padding: 0 4rem;
   margin: 0;
-  box-shadow: 0 0.01rem 0.01rem 0 rgba(0, 0, 0, 0.2), 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.19);
+  height: 64px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: relative;
+  z-index: 100;
 }
-.main-header nav ul {
+
+.logo {
+  color: #005cbb;
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  position: absolute;
+  left: 4rem;
+}
+
+.header-spacer {
+  display: none;
+}
+
+/* Navigation desktop */
+.desktop-nav {
+  display: flex;
+}
+
+.desktop-nav ul {
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
 }
-.main-header h1{
-  color: #005cbb;
+
+.desktop-nav li {
+  display: flex;
+  align-items: center;
 }
-@media screen and (max-width: 60rem) {
-  .main-header{
-    padding: 0 calc(3rem / 2);
-  }
-}
-.main-header a{
+
+.desktop-nav a {
   text-decoration: none;
-  color: #000;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
 }
-.main-header a.active-link{
+
+.desktop-nav a:hover {
   color: #005cbb;
 }
-.main-header a:hover::after{
+
+.desktop-nav a:hover::after {
   content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: 0.2rem;
-  display: block;
+  height: 2px;
   background: #011220;
+  animation: slideIn 0.3s ease;
 }
-.main-header a.active-link::after{
+
+.desktop-nav a.active-link {
+  color: #005cbb;
+}
+
+.desktop-nav a.active-link::after {
   content: "";
-  margin: auto;
-  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: 0.2rem;
+  height: 2px;
   background-color: #005cbb;
-  -webkit-animation: linear 0.2s link-change-width;;
-  animation: linear 0.3s  link-change-width;
+  animation: slideIn 0.3s ease;
 }
-@-webkit-keyframes link-change-width {
-  from{
+
+/* Bouton menu mobile */
+.mobile-menu-button {
+  display: none;
+  position: absolute;
+  left: 1rem;
+}
+
+/* Navigation mobile */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: -280px;
+  width: 280px;
+  height: calc(100vh - 64px);
+  background-color: #fff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 99;
+  overflow-y: auto;
+}
+
+.mobile-nav.open {
+  left: 0;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 2rem 0;
+  margin: 0;
+}
+
+.mobile-nav li {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 1.25rem 2rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mobile-nav a:hover {
+  background-color: #f5f5f5;
+  color: #005cbb;
+}
+
+.mobile-nav a.active-link {
+  color: #005cbb;
+  background-color: #e3f2fd;
+  border-left: 4px solid #005cbb;
+}
+
+/* Overlay mobile */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 64px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 98;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
     width: 0;
   }
-  to{
+  to {
     width: 100%;
   }
 }
-@keyframes link-change-width {
-  from{
-    width: 0;
+
+/* Media queries */
+@media screen and (max-width: 768px) {
+  .main-header {
+    padding: 0 1rem;
+    justify-content: center;
   }
-  to{
-    width: 100%;
+
+  .logo {
+    position: static;
+    font-size: 1.5rem;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: flex;
+  }
+
+  .header-spacer {
+    display: block;
+    width: 48px;
+  }
+
+  .mobile-nav,
+  .mobile-overlay {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main-header {
+    padding: 0 0.75rem;
+    height: 56px;
+  }
+
+  .mobile-nav {
+    top: 56px;
+    height: calc(100vh - 56px);
+    width: 75%;
+    max-width: 280px;
+  }
+
+  .mobile-overlay {
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .mobile-menu-button {
+    left: 0.5rem;
   }
 }
