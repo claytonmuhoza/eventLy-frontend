@@ -1,48 +1,109 @@
-.link-container{
+.link-container {
   text-decoration: none;
   color: inherit;
   display: block;
   flex: 1;
 }
-.artiste-list-card{
+
+.artiste-list-card {
   display: flex;
   flex-direction: row;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   justify-content: space-between;
   box-sizing: border-box;
   transform-origin: center;
-  animation: ease-in 0.7s  card-scale;
+  animation: ease-in 0.7s card-scale;
+  overflow: hidden;
 }
+
 @keyframes card-scale {
   from {
     transform: scale(0.5);
   }
-  to{
+  to {
     transform: scale(1);
   }
-
 }
-.artist-card-event-list-container{
+
+.artist-card-event-list-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  min-width: 0;
 }
-.artist-card-event-list-container .artist-card-event-container{
+
+.artist-card-event-container {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
-.artist-card-event-list-container .artist-card-event-container > *{
-  flex-grow: 1;
+
+.event-chip {
+  max-width: 40%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #333;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #e0e0e0;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: background-color 0.2s, border-color 0.2s;
 }
-.card-main-container{
+
+.event-chip:hover {
+  background-color: #eeeeee;
+  border-color: #d0d0d0;
+}
+
+/* Quand il y a 2 événements, ils partagent l'espace */
+.artist-card-event-container:has(.event-chip:nth-child(2):not(.plus-chip)) .event-chip:not(.plus-chip) {
+  flex: 1;
+  max-width: 50%;
+}
+
+.plus-chip {
+  flex: 0 0 auto;
+  min-width: auto;
+  max-width: none;
+  border-color: #bbdefb;
+  font-weight: 500;
+}
+
+.plus-chip:hover {
+  background-color: #bbdefb;
+  border-color: #90caf9;
+}
+
+.no-event {
+  font-style: italic;
+  color: #666;
+}
+
+.card-main-container {
   display: flex;
   flex-direction: column;
   padding: 0.3rem 0;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
-.first-letter-of-artist-card{
+
+.artist-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.first-letter-of-artist-card {
   box-sizing: border-box;
   border: 0.1rem solid #000;
   font-size: 1.5rem;
@@ -52,8 +113,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
-.left-container{
+
+.left-container {
   padding: 0.3rem;
   box-sizing: border-box;
   display: flex;
@@ -62,11 +125,16 @@
   align-items: center;
   justify-content: left;
   gap: 1rem;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
-.artist-card-content{
+
+.artist-card-content {
   display: flex;
   justify-content: left;
   align-items: center;
   font-size: 1.5rem;
   gap: 0.1rem;
+  flex-shrink: 0;
 }

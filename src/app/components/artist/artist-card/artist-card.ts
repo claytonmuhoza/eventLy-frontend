@@ -1,9 +1,8 @@
 import {Component, input} from '@angular/core';
 import {Artist} from '../../../models/artist';
-import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
+import {MatCard,  MatCardContent, } from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
-import {MatChip} from '@angular/material/chips';
 
 @Component({
   selector: 'app-artist-card',
@@ -11,8 +10,7 @@ import {MatChip} from '@angular/material/chips';
     MatCard,
     MatCardContent,
     MatIcon,
-    RouterLink,
-    MatChip
+    RouterLink
   ],
   templateUrl: './artist-card.html',
   styleUrl: './artist-card.css'
