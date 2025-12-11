@@ -1,22 +1,268 @@
-.statistics-container{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1rem;
-  width: 100%;
+/* Container principal */
+.home-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  padding: 3rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
-.statistics-container > *{
-  flex-grow: 1;
-  padding: 2rem 1rem;
-}
-.flex-center{
+
+/* Loading state */
+.loading-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  gap: 1.5rem;
+  min-height: 50vh;
 }
-.loading.flex-center{
-  margin-top: 3rem;
-  flex-direction: column;
-  gap: 2rem;
+
+.loading-container p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Cards */
+.preview-card {
+  padding: 2rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.preview-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Card header avec icône */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* Container des icônes */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #005cbb 0%, #0077e6 100%);
+  box-shadow: 0 4px 12px rgba(0, 92, 187, 0.3);
+}
+
+/* Animation du microphone */
+.microphone-icon {
+  width: 60px;
+  height: 60px;
+  animation: micBounce 2s ease-in-out infinite;
+}
+
+.mic-body {
+  fill: #fff;
+}
+
+.mic-line {
+  stroke: #005cbb;
+  opacity: 0.6;
+}
+
+.mic-support,
+.mic-stand,
+.mic-base {
+  stroke: #fff;
+  stroke-linecap: round;
+}
+
+/* Ondes sonores animées */
+.sound-waves .wave {
+  stroke: #fff;
+  opacity: 0;
+  animation: soundPulse 2s ease-in-out infinite;
+}
+
+.wave-1 {
+  animation-delay: 0s;
+}
+
+.wave-2 {
+  animation-delay: 0.2s;
+}
+
+.wave-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes micBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes soundPulse {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation du vinyl */
+.vinyl-icon {
+  width: 60px;
+  height: 60px;
+  animation: vinylRotate 3s linear infinite;
+}
+
+.vinyl-disk {
+  fill: #1a1a1a;
+}
+
+.vinyl-groove {
+  stroke: #333;
+  opacity: 0.6;
+}
+
+.vinyl-label {
+  fill: #d32f2f;
+}
+
+.vinyl-center {
+  fill: #fff;
+}
+
+.vinyl-shine {
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-linecap: round;
+}
+
+@keyframes vinylRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Content */
+.stats-number {
+  font-size: 2rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 1.5rem;
+}
+
+
+.preview-item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.preview-item:last-child {
+  border-bottom: none;
+}
+
+.item-label {
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.empty-state {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.95rem;
+  padding: 2rem 1rem;
+}
+
+.view-all-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* Responsive design */
+@media screen and (max-width: 900px) {
+  .home-container {
+    grid-template-columns: 1fr;
+    padding: 2rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .icon-container {
+    width: 70px;
+    height: 70px;
+  }
+
+  .microphone-icon,
+  .vinyl-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .card-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .stats-number {
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-container {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .preview-card {
+    padding: 1.5rem;
+  }
+
+  .card-header {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .icon-container {
+    width: 60px;
+    height: 60px;
+  }
+
+  .microphone-icon,
+  .vinyl-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .stats-number {
+    font-size: 1.5rem;
+  }
+
+
+  .item-label {
+    font-size: 0.9rem;
+  }
 }
